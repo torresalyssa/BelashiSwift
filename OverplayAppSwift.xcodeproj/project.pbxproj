@@ -8,20 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		4FC232351C863577006987F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC232341C863577006987F7 /* AppDelegate.swift */; };
-		4FC232371C863577006987F7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC232361C863577006987F7 /* ViewController.swift */; };
+		4FC232371C863577006987F7 /* ChooseOverplayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC232361C863577006987F7 /* ChooseOverplayerViewController.swift */; };
 		4FC2323A1C863577006987F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FC232381C863577006987F7 /* Main.storyboard */; };
 		4FC2323C1C863577006987F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FC2323B1C863577006987F7 /* Assets.xcassets */; };
 		4FC2323F1C863577006987F7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FC2323D1C863577006987F7 /* LaunchScreen.storyboard */; };
+		4FC232471C8637FC006987F7 /* OverplayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC232461C8637FC006987F7 /* OverplayerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4FC232311C863577006987F7 /* OverplayAppSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OverplayAppSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FC232341C863577006987F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4FC232361C863577006987F7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4FC232361C863577006987F7 /* ChooseOverplayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseOverplayerViewController.swift; sourceTree = "<group>"; };
 		4FC232391C863577006987F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4FC2323B1C863577006987F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4FC2323E1C863577006987F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4FC232401C863577006987F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4FC232461C8637FC006987F7 /* OverplayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverplayerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,8 +57,9 @@
 			isa = PBXGroup;
 			children = (
 				4FC232341C863577006987F7 /* AppDelegate.swift */,
-				4FC232361C863577006987F7 /* ViewController.swift */,
+				4FC232361C863577006987F7 /* ChooseOverplayerViewController.swift */,
 				4FC232381C863577006987F7 /* Main.storyboard */,
+				4FC232461C8637FC006987F7 /* OverplayerViewController.swift */,
 				4FC2323B1C863577006987F7 /* Assets.xcassets */,
 				4FC2323D1C863577006987F7 /* LaunchScreen.storyboard */,
 				4FC232401C863577006987F7 /* Info.plist */,
@@ -134,7 +137,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4FC232371C863577006987F7 /* ViewController.swift in Sources */,
+				4FC232471C8637FC006987F7 /* OverplayerViewController.swift in Sources */,
+				4FC232371C863577006987F7 /* ChooseOverplayerViewController.swift in Sources */,
 				4FC232351C863577006987F7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

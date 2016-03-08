@@ -8,7 +8,12 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ChooseOverplayerViewController: UIViewController {
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
