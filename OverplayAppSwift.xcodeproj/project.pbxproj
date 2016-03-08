@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F1AFC911C8F5E750089B82C /* Overplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AFC901C8F5E750089B82C /* Overplayer.swift */; };
 		4FC232351C863577006987F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC232341C863577006987F7 /* AppDelegate.swift */; };
 		4FC232371C863577006987F7 /* ChooseOverplayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC232361C863577006987F7 /* ChooseOverplayerViewController.swift */; };
 		4FC2323A1C863577006987F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FC232381C863577006987F7 /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		4CA9131026E61A775BACE4A0 /* Pods_OverplayAppSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OverplayAppSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F1AFC901C8F5E750089B82C /* Overplayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Overplayer.swift; sourceTree = "<group>"; };
 		4FC232311C863577006987F7 /* OverplayAppSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OverplayAppSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FC232341C863577006987F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FC232361C863577006987F7 /* ChooseOverplayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseOverplayerViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				4FC232341C863577006987F7 /* AppDelegate.swift */,
 				4FC232361C863577006987F7 /* ChooseOverplayerViewController.swift */,
 				4FC232381C863577006987F7 /* Main.storyboard */,
+				4F1AFC901C8F5E750089B82C /* Overplayer.swift */,
 				4FC232461C8637FC006987F7 /* OverplayerViewController.swift */,
 				4FC2323B1C863577006987F7 /* Assets.xcassets */,
 				4FC2323D1C863577006987F7 /* LaunchScreen.storyboard */,
@@ -212,6 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F1AFC911C8F5E750089B82C /* Overplayer.swift in Sources */,
 				4FC232471C8637FC006987F7 /* OverplayerViewController.swift in Sources */,
 				4FC232371C863577006987F7 /* ChooseOverplayerViewController.swift in Sources */,
 				4FC232351C863577006987F7 /* AppDelegate.swift in Sources */,

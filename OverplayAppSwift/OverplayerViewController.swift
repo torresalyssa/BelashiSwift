@@ -9,6 +9,8 @@
 import UIKit
 
 class OverplayerViewController: UIViewController {
+    
+    var op = Overplayer()
 
     override func viewDidLoad() {
         super.viewDidLoad()
