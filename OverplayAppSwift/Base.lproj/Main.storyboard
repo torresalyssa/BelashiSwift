@@ -7,7 +7,7 @@
         <!--ChooseOverplayerViewController-->
         <scene sceneID="zDD-rG-Y8O">
             <objects>
-                <viewController title="ChooseOverplayerViewController" id="dOw-F6-NAD" sceneMemberID="viewController">
+                <viewController title="ChooseOverplayerViewController" id="dOw-F6-NAD" customClass="ChooseOverplayerViewController" customModule="OverplayAppSwift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pOf-77-oUT"/>
                         <viewControllerLayoutGuide type="bottom" id="u8J-WY-UWv"/>
@@ -15,10 +15,39 @@
                     <view key="view" contentMode="scaleToFill" id="sSX-qo-oBM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="92M-rR-qvH">
+                                <rect key="frame" x="0.0" y="228" width="414" height="508"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5K2-NU-3lG">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="228"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="OPLogo" translatesAutoresizingMaskIntoConstraints="NO" id="L6K-Px-4yT">
+                                        <rect key="frame" x="17" y="19" width="162" height="37"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DBZ-D9-TRQ">
+                                        <rect key="frame" x="186" y="103" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="DBZ-D9-TRQ" firstAttribute="centerX" secondItem="5K2-NU-3lG" secondAttribute="centerX" id="7W0-eB-7SS"/>
+                                    <constraint firstItem="DBZ-D9-TRQ" firstAttribute="centerY" secondItem="5K2-NU-3lG" secondAttribute="centerY" id="yeV-7I-Gyn"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="XMa-ky-TJv"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="foundUnitsTable" destination="92M-rR-qvH" id="N6a-XE-65R"/>
+                        <outlet property="mainStatusLabel" destination="DBZ-D9-TRQ" id="9TS-xS-tet"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wuE-ca-Icj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -62,4 +91,7 @@
             <point key="canvasLocation" x="447" y="420"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="OPLogo" width="275" height="57"/>
+    </resources>
 </document>

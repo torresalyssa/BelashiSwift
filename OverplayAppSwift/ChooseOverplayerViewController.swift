@@ -7,12 +7,21 @@
 //
 
 import UIKit
+import Alamofire
+import CocoaAsyncSocket
 
 class ChooseOverplayerViewController: UIViewController {
+
+    @IBOutlet var mainStatusLabel: UILabel!
+    @IBOutlet var foundUnitsTable: UITableView!
+    
+    var availableOverplayers: NSMutableArray!
+    var sortedOverplayers: NSArray!
+    var iphoneIPAddress: NSString!
+    var refreshControl: UIRefreshControl!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
     override func viewDidLoad() {

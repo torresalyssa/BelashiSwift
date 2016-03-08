@@ -13,9 +13,11 @@
 		4FC2323C1C863577006987F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FC2323B1C863577006987F7 /* Assets.xcassets */; };
 		4FC2323F1C863577006987F7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FC2323D1C863577006987F7 /* LaunchScreen.storyboard */; };
 		4FC232471C8637FC006987F7 /* OverplayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC232461C8637FC006987F7 /* OverplayerViewController.swift */; };
+		C1DF3E7ED0283B6E64600954 /* Pods_OverplayAppSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CA9131026E61A775BACE4A0 /* Pods_OverplayAppSwift.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4CA9131026E61A775BACE4A0 /* Pods_OverplayAppSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OverplayAppSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FC232311C863577006987F7 /* OverplayAppSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OverplayAppSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FC232341C863577006987F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FC232361C863577006987F7 /* ChooseOverplayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseOverplayerViewController.swift; sourceTree = "<group>"; };
@@ -24,6 +26,8 @@
 		4FC2323E1C863577006987F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4FC232401C863577006987F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FC232461C8637FC006987F7 /* OverplayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverplayerViewController.swift; sourceTree = "<group>"; };
+		9391B5AEE33F9FDB39DDB969 /* Pods-OverplayAppSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OverplayAppSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-OverplayAppSwift/Pods-OverplayAppSwift.release.xcconfig"; sourceTree = "<group>"; };
+		D6FCA368956CA0A0DABBF89F /* Pods-OverplayAppSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OverplayAppSwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OverplayAppSwift/Pods-OverplayAppSwift.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +35,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1DF3E7ED0283B6E64600954 /* Pods_OverplayAppSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		38D86CF0061214CB6CADA6C5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4CA9131026E61A775BACE4A0 /* Pods_OverplayAppSwift.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		4FC232281C863577006987F7 = {
 			isa = PBXGroup;
 			children = (
 				4FC232331C863577006987F7 /* OverplayAppSwift */,
 				4FC232321C863577006987F7 /* Products */,
+				96941CD9AE346C54FAEED32A /* Pods */,
+				38D86CF0061214CB6CADA6C5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +82,15 @@
 			path = OverplayAppSwift;
 			sourceTree = "<group>";
 		};
+		96941CD9AE346C54FAEED32A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D6FCA368956CA0A0DABBF89F /* Pods-OverplayAppSwift.debug.xcconfig */,
+				9391B5AEE33F9FDB39DDB969 /* Pods-OverplayAppSwift.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +98,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4FC232431C863577006987F7 /* Build configuration list for PBXNativeTarget "OverplayAppSwift" */;
 			buildPhases = (
+				BE38FC09AA39D08DF33414FF /* Check Pods Manifest.lock */,
 				4FC2322D1C863577006987F7 /* Sources */,
 				4FC2322E1C863577006987F7 /* Frameworks */,
 				4FC2322F1C863577006987F7 /* Resources */,
+				65AA925EC556F44451083265 /* Embed Pods Frameworks */,
+				DB7A7DBCBD6264C7B2A8C7A4 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -131,6 +158,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		65AA925EC556F44451083265 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OverplayAppSwift/Pods-OverplayAppSwift-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BE38FC09AA39D08DF33414FF /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DB7A7DBCBD6264C7B2A8C7A4 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OverplayAppSwift/Pods-OverplayAppSwift-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4FC2322D1C863577006987F7 /* Sources */ = {
@@ -250,6 +325,7 @@
 		};
 		4FC232441C863577006987F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D6FCA368956CA0A0DABBF89F /* Pods-OverplayAppSwift.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = OverplayAppSwift/Info.plist;
@@ -261,6 +337,7 @@
 		};
 		4FC232451C863577006987F7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9391B5AEE33F9FDB39DDB969 /* Pods-OverplayAppSwift.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = OverplayAppSwift/Info.plist;
@@ -289,6 +366,7 @@
 				4FC232451C863577006987F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
