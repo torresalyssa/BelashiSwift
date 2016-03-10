@@ -60,11 +60,15 @@ class ChooseOverplayerViewController: UIViewController, UITableViewDelegate, UIT
 
     func findOverplayers() {
         self.refreshControl.beginRefreshing()
-        
-        // TODO: get iPhone IP address
-        
-        self.mainStatusLabel.text = "Testing"
         self.availableOverplayers = []
+        
+        if let address = NetUtils.getWifiAddress() {
+            self.mainStatusLabel.text = String(format: "My IP: %s", address)
+        } else {
+            self.mainStatusLabel.text = "Not on a WiFi Network"
+            self.refreshControl.endRefreshing()
+        }
+        
     }
     
     func sortByIPAndReload() {

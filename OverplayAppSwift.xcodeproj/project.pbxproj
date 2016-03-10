@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4F1AFC911C8F5E750089B82C /* Overplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AFC901C8F5E750089B82C /* Overplayer.swift */; };
+		4F1AFC931C92118A0089B82C /* NetUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AFC921C92118A0089B82C /* NetUtils.swift */; };
 		4FC232351C863577006987F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC232341C863577006987F7 /* AppDelegate.swift */; };
 		4FC232371C863577006987F7 /* ChooseOverplayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC232361C863577006987F7 /* ChooseOverplayerViewController.swift */; };
 		4FC2323A1C863577006987F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FC232381C863577006987F7 /* Main.storyboard */; };
@@ -20,6 +21,8 @@
 /* Begin PBXFileReference section */
 		4CA9131026E61A775BACE4A0 /* Pods_OverplayAppSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OverplayAppSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F1AFC901C8F5E750089B82C /* Overplayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Overplayer.swift; sourceTree = "<group>"; };
+		4F1AFC921C92118A0089B82C /* NetUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetUtils.swift; sourceTree = "<group>"; };
+		4F1AFC9A1C9214D10089B82C /* OverplayAppSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OverplayAppSwift-Bridging-Header.h"; sourceTree = "<group>"; };
 		4FC232311C863577006987F7 /* OverplayAppSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OverplayAppSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FC232341C863577006987F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FC232361C863577006987F7 /* ChooseOverplayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseOverplayerViewController.swift; sourceTree = "<group>"; };
@@ -75,12 +78,14 @@
 			children = (
 				4FC232341C863577006987F7 /* AppDelegate.swift */,
 				4FC232361C863577006987F7 /* ChooseOverplayerViewController.swift */,
+				4F1AFC921C92118A0089B82C /* NetUtils.swift */,
 				4FC232381C863577006987F7 /* Main.storyboard */,
 				4F1AFC901C8F5E750089B82C /* Overplayer.swift */,
 				4FC232461C8637FC006987F7 /* OverplayerViewController.swift */,
 				4FC2323B1C863577006987F7 /* Assets.xcassets */,
 				4FC2323D1C863577006987F7 /* LaunchScreen.storyboard */,
 				4FC232401C863577006987F7 /* Info.plist */,
+				4F1AFC9A1C9214D10089B82C /* OverplayAppSwift-Bridging-Header.h */,
 			);
 			path = OverplayAppSwift;
 			sourceTree = "<group>";
@@ -123,6 +128,7 @@
 		4FC232291C863577006987F7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "App Delegates";
 				TargetAttributes = {
@@ -215,6 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F1AFC931C92118A0089B82C /* NetUtils.swift in Sources */,
 				4F1AFC911C8F5E750089B82C /* Overplayer.swift in Sources */,
 				4FC232471C8637FC006987F7 /* OverplayerViewController.swift in Sources */,
 				4FC232371C863577006987F7 /* ChooseOverplayerViewController.swift in Sources */,
@@ -332,10 +339,13 @@
 			baseConfigurationReference = D6FCA368956CA0A0DABBF89F /* Pods-OverplayAppSwift.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = OverplayAppSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = alyssa.OverplayAppSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "OverplayAppSwift/OverplayAppSwift-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -344,10 +354,12 @@
 			baseConfigurationReference = 9391B5AEE33F9FDB39DDB969 /* Pods-OverplayAppSwift.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = OverplayAppSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = alyssa.OverplayAppSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "OverplayAppSwift/OverplayAppSwift-Bridging-Header.h";
 			};
 			name = Release;
 		};
