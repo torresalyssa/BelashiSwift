@@ -65,14 +65,6 @@ class ChooseOverplayerViewController: UIViewController, UITableViewDelegate, UIT
         
         self.mainStatusLabel.text = "Testing"
         self.availableOverplayers = []
-        
-        let newOverplayer = Overplayer()
-        newOverplayer.ipAddress = "0.0.0.0"
-        newOverplayer.systemName = "Test overplayer"
-        newOverplayer.location = "a room"
-        
-        self.availableOverplayers.append(newOverplayer)
-        self.refreshControl.endRefreshing()
     }
     
     func sortByIPAndReload() {
@@ -82,22 +74,62 @@ class ChooseOverplayerViewController: UIViewController, UITableViewDelegate, UIT
         self.foundUnitsTable.reloadData()
     }
     
+    
     // MARK: - GCDAsyncUdpSocket
     
     func udpSocket(sock: GCDAsyncUdpSocket!, didReceiveData data: NSData!, fromAddress address: NSData!, withFilterContext filterContext: AnyObject!) {
         
-        var overplayerJson: NSDictionary
+        let toAdd = Overplayer()
         do {
-            overplayerJson = try NSJSONSerialization.JSONObjectWithData(data, options:[]) as! NSDictionary
+            let overplayerJson = try NSJSONSerialization.JSONObjectWithData(data, options:[])
+            if let name = overplayerJson["name"] as? String {
+                toAdd.systemName = name
+            }
+            if let location = overplayerJson["location"] as? String {
+                toAdd.location = location
+            }
         } catch {
-            print("Error converting UDP packet to JSON")
+            print("Error reading UDP JSON.")
+            return
         }
         
-        let toAdd = Overplayer()
-        //toAdd.systemName = overplayerJson["name"]
-        //toAdd.location = overplayerJson["location"]
+        var addressString : String?
+        var sa = sockaddr()
+        address.getBytes(&sa, length: sizeof(sockaddr))
+        switch (Int32(sa.sa_family)) {
+            
+        case AF_INET:
+            var ip4 = sockaddr_in()
+            address.getBytes(&ip4, length: sizeof(sockaddr_in))
+            addressString = String(format: "%s", inet_ntoa(ip4.sin_addr))
+            
+        case AF_INET6:
+            // ignore 
+            break
+            
+        default:
+            break
+        }
         
+        if (addressString != nil) {
+            
+            for op in self.availableOverplayers {
+                if op.ipAddress == addressString {
+                    op.systemName = toAdd.systemName
+                    op.location = toAdd.location
+                    self.refreshControl.endRefreshing()
+                    self.foundUnitsTable.reloadData()
+                    return
+                }
+            }
+            
+            toAdd.ipAddress = addressString!
+            self.availableOverplayers.append(toAdd)
+            self.refreshControl.endRefreshing()
+            self.sortByIPAndReload()
+        }
     }
+    
     
     // MARK: - UITableViewDelegate
     
@@ -116,9 +148,7 @@ class ChooseOverplayerViewController: UIViewController, UITableViewDelegate, UIT
             cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "SimpleTableItem")
         }
         
-        // TODO: actually do this
-        
-        cell!.textLabel!.text = "Test"
+        cell!.textLabel!.text = self.availableOverplayers[indexPath.row].systemName
         cell!.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         return cell!
     }
@@ -127,11 +157,11 @@ class ChooseOverplayerViewController: UIViewController, UITableViewDelegate, UIT
         self.performSegueWithIdentifier("toOPControl", sender: nil)
     }
     
+    
     // MARK: - Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "toOPControl") {
-            print("segueing")
             self.refreshControl.endRefreshing()
             let indexPath = self.foundUnitsTable.indexPathForSelectedRow
             let op = self.availableOverplayers[indexPath!.row]
