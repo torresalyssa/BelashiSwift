@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import CocoaAsyncSocket
 
-class ChooseOverplayerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ChooseOverplayerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, GCDAsyncUdpSocketDelegate {
 
     @IBOutlet var mainStatusLabel: UILabel!
     @IBOutlet var foundUnitsTable: UITableView!
@@ -16,9 +17,9 @@ class ChooseOverplayerViewController: UIViewController, UITableViewDelegate, UIT
     var availableOverplayers = [Overplayer]()
     var iphoneIPAddress = ""
     var refreshControl: UIRefreshControl!
-    //var socket: GCDAsyncUdpSocket
+    var socket: GCDAsyncUdpSocket!
     
-    let PORT = 9090
+    let PORT: UInt16 = 9090
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
@@ -28,18 +29,27 @@ class ChooseOverplayerViewController: UIViewController, UITableViewDelegate, UIT
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        //self.socket = GCDAsyncUdpSocket(delegate: self, delegateQueue: dispatch_get_main_queue())
-        //var error: NSError?
-        //self.socket.bindToPort(PORT, error: &error)
-        //self.socket.beginReceiving(&error)
+        self.socket = GCDAsyncUdpSocket(delegate: self, delegateQueue: dispatch_get_main_queue())
+
+        do {
+            try self.socket.bindToPort(PORT)
+        } catch {
+            print("Socket failed to bind to port %d", PORT)
+        }
+        
+        do {
+            try self.socket.beginReceiving()
+        } catch {
+            self.socket.close()
+            print("Socket failed to begin receiving.")
+        }
         
         self.foundUnitsTable.dataSource = self
         self.foundUnitsTable.delegate = self
         
         self.refreshControl = UIRefreshControl()
-        self.refreshControl.addTarget(self, action: "findOverplayers:", forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl.addTarget(self, action: Selector("findOverplayers"), forControlEvents: UIControlEvents.ValueChanged)
         self.foundUnitsTable.addSubview(self.refreshControl)
-        
         self.findOverplayers()
     }
 
@@ -62,6 +72,7 @@ class ChooseOverplayerViewController: UIViewController, UITableViewDelegate, UIT
         newOverplayer.location = "a room"
         
         self.availableOverplayers.append(newOverplayer)
+        self.refreshControl.endRefreshing()
     }
     
     func sortByIPAndReload() {
@@ -69,6 +80,23 @@ class ChooseOverplayerViewController: UIViewController, UITableViewDelegate, UIT
         // TODO: sort array by IP
         
         self.foundUnitsTable.reloadData()
+    }
+    
+    // MARK: - GCDAsyncUdpSocket
+    
+    func udpSocket(sock: GCDAsyncUdpSocket!, didReceiveData data: NSData!, fromAddress address: NSData!, withFilterContext filterContext: AnyObject!) {
+        
+        var overplayerJson: NSDictionary
+        do {
+            overplayerJson = try NSJSONSerialization.JSONObjectWithData(data, options:[]) as! NSDictionary
+        } catch {
+            print("Error converting UDP packet to JSON")
+        }
+        
+        let toAdd = Overplayer()
+        //toAdd.systemName = overplayerJson["name"]
+        //toAdd.location = overplayerJson["location"]
+        
     }
     
     // MARK: - UITableViewDelegate
@@ -95,10 +123,11 @@ class ChooseOverplayerViewController: UIViewController, UITableViewDelegate, UIT
         return cell!
     }
     
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.performSegueWithIdentifier("toOPControl", sender: nil)
     }
     
+    // MARK: - Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "toOPControl") {
