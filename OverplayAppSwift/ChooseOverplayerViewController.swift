@@ -55,6 +55,7 @@ class ChooseOverplayerViewController: UIViewController, UICollectionViewDelegate
         self.overplayerCollection.addSubview(self.refreshControl)
         self.overplayerCollection.alwaysBounceVertical = true
         
+        // For testing
         let op1 = Overplayer()
         op1.ipAddress = "127.34.5.9"
         op1.systemName = "Overplayer"
@@ -83,6 +84,8 @@ class ChooseOverplayerViewController: UIViewController, UICollectionViewDelegate
 
     func findOverplayers() {
         self.refreshControl.beginRefreshing()
+        
+        // Took this out for testing purposes. Add back in!
         //self.availableOverplayers = []
         
         if let address = NetUtils.getWifiAddress() {
@@ -94,7 +97,7 @@ class ChooseOverplayerViewController: UIViewController, UICollectionViewDelegate
         
         // This stops the spinner if we have seen no UDP packets in 10s, and also clears the list of overplayers.
         // May need to adjust wait time depending on how often overplayers broadcast.
-        NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: Selector("stopRefresh"),userInfo: nil, repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: Selector("stopRefresh"), userInfo: nil, repeats: false)
     }
     
     func stopRefresh() {
