@@ -27,8 +27,8 @@ class ChooseOverplayerViewController: UIViewController, UITableViewDelegate, UIT
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
+        // Setup UDP socket
         self.socket = GCDAsyncUdpSocket(delegate: self, delegateQueue: dispatch_get_main_queue())
 
         do {
@@ -44,12 +44,14 @@ class ChooseOverplayerViewController: UIViewController, UITableViewDelegate, UIT
             print("Socket failed to begin receiving.")
         }
         
+        //
         self.foundUnitsTable.dataSource = self
         self.foundUnitsTable.delegate = self
         
         self.refreshControl = UIRefreshControl()
         self.refreshControl.addTarget(self, action: Selector("findOverplayers"), forControlEvents: UIControlEvents.ValueChanged)
         self.foundUnitsTable.addSubview(self.refreshControl)
+        
         self.findOverplayers()
     }
 
@@ -63,12 +65,17 @@ class ChooseOverplayerViewController: UIViewController, UITableViewDelegate, UIT
         self.availableOverplayers = []
         
         if let address = NetUtils.getWifiAddress() {
-            self.mainStatusLabel.text = String(format: "My IP: %s", address)
+            self.mainStatusLabel.text = String(format: "My IP: \(address)")
         } else {
             self.mainStatusLabel.text = "Not on a WiFi Network"
             self.refreshControl.endRefreshing()
         }
         
+        NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: Selector("stopRefresh"),userInfo: nil, repeats: false)
+    }
+    
+    func stopRefresh() {
+        self.refreshControl.endRefreshing()
     }
     
     func sortByIPAndReload() {
