@@ -71,17 +71,27 @@ class ChooseOverplayerViewController: UIViewController, UITableViewDelegate, UIT
             self.refreshControl.endRefreshing()
         }
         
+        // This stops the spinner if we have seen no UDP packets in 10s, and also clears the list of overplayers.
+        // May need to adjust wait time depending on how often overplayers broadcast.
         NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: Selector("stopRefresh"),userInfo: nil, repeats: false)
     }
     
     func stopRefresh() {
+        self.sortByIPAndReload()
         self.refreshControl.endRefreshing()
     }
     
     func sortByIPAndReload() {
-        
-        // TODO: sort array by IP
-        
+        self.availableOverplayers.sortInPlace {
+            (a : Overplayer, b : Overplayer) -> Bool in
+            
+            let comp = a.ipAddress.compare(b.ipAddress, options: NSStringCompareOptions.NumericSearch)
+            if comp == NSComparisonResult.OrderedAscending {
+                return true
+            } else {
+                return false
+            }
+        }
         self.foundUnitsTable.reloadData()
     }
     
@@ -104,28 +114,10 @@ class ChooseOverplayerViewController: UIViewController, UITableViewDelegate, UIT
             return
         }
         
-        var addressString : String?
-        var sa = sockaddr()
-        address.getBytes(&sa, length: sizeof(sockaddr))
-        switch (Int32(sa.sa_family)) {
-            
-        case AF_INET:
-            var ip4 = sockaddr_in()
-            address.getBytes(&ip4, length: sizeof(sockaddr_in))
-            addressString = String(format: "%s", inet_ntoa(ip4.sin_addr))
-            
-        case AF_INET6:
-            // ignore 
-            break
-            
-        default:
-            break
-        }
-        
-        if (addressString != nil) {
+        if let ipAddress = NetUtils.getIPAddress(address) {
             
             for op in self.availableOverplayers {
-                if op.ipAddress == addressString {
+                if op.ipAddress == ipAddress {
                     op.systemName = toAdd.systemName
                     op.location = toAdd.location
                     self.refreshControl.endRefreshing()
@@ -133,8 +125,7 @@ class ChooseOverplayerViewController: UIViewController, UITableViewDelegate, UIT
                     return
                 }
             }
-            
-            toAdd.ipAddress = addressString!
+            toAdd.ipAddress = ipAddress
             self.availableOverplayers.append(toAdd)
             self.refreshControl.endRefreshing()
             self.sortByIPAndReload()

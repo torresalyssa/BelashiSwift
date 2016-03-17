@@ -31,4 +31,19 @@ class NetUtils: NSObject {
         }
         return address
     }
+    
+    static func getIPAddress(address:  NSData) -> String? {
+        var ipAddress: String?
+        var sa = sockaddr()
+        
+        address.getBytes(&sa, length: sizeof(sockaddr))
+        
+        if Int32(sa.sa_family) == AF_INET {
+            var ip4 = sockaddr_in()
+            address.getBytes(&ip4, length: sizeof(sockaddr_in))
+            ipAddress = String(format: "%s", inet_ntoa(ip4.sin_addr))
+        }
+        
+        return ipAddress
+    }
 }
