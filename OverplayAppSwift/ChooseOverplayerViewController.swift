@@ -9,10 +9,10 @@
 import UIKit
 import CocoaAsyncSocket
 
-class ChooseOverplayerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, GCDAsyncUdpSocketDelegate {
+class ChooseOverplayerViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, GCDAsyncUdpSocketDelegate {
 
     @IBOutlet var mainStatusLabel: UILabel!
-    @IBOutlet var foundUnitsTable: UITableView!
+    @IBOutlet var overplayerCollection: UICollectionView!
     
     var availableOverplayers = [Overplayer]()
     var iphoneIPAddress = ""
@@ -44,13 +44,34 @@ class ChooseOverplayerViewController: UIViewController, UITableViewDelegate, UIT
             print("Socket failed to begin receiving.")
         }
         
-        //
-        self.foundUnitsTable.dataSource = self
-        self.foundUnitsTable.delegate = self
+        // Setup collection view
+        self.overplayerCollection.dataSource = self
+        self.overplayerCollection.delegate = self
+        self.overplayerCollection.allowsMultipleSelection = false
+        
         
         self.refreshControl = UIRefreshControl()
         self.refreshControl.addTarget(self, action: Selector("findOverplayers"), forControlEvents: UIControlEvents.ValueChanged)
-        self.foundUnitsTable.addSubview(self.refreshControl)
+        self.overplayerCollection.addSubview(self.refreshControl)
+        self.overplayerCollection.alwaysBounceVertical = true
+        
+        let op1 = Overplayer()
+        op1.ipAddress = "127.34.5.9"
+        op1.systemName = "Overplayer"
+        op1.location = "Bar"
+        self.availableOverplayers.append(op1)
+        
+        let op2 = Overplayer()
+        op2.ipAddress = "128.0.5.9"
+        op2.systemName = "Overplayer"
+        op2.location = "Pool Table"
+        self.availableOverplayers.append(op2)
+        
+        let op3 = Overplayer()
+        op3.ipAddress = "127.2.5.9"
+        op3.systemName = "Overplayer"
+        op3.location = "Back Room"
+        self.availableOverplayers.append(op3)
         
         self.findOverplayers()
     }
@@ -62,7 +83,7 @@ class ChooseOverplayerViewController: UIViewController, UITableViewDelegate, UIT
 
     func findOverplayers() {
         self.refreshControl.beginRefreshing()
-        self.availableOverplayers = []
+        //self.availableOverplayers = []
         
         if let address = NetUtils.getWifiAddress() {
             self.mainStatusLabel.text = String(format: "My IP: \(address)")
@@ -92,7 +113,7 @@ class ChooseOverplayerViewController: UIViewController, UITableViewDelegate, UIT
                 return false
             }
         }
-        self.foundUnitsTable.reloadData()
+        self.overplayerCollection.reloadData()
     }
     
     
@@ -121,7 +142,7 @@ class ChooseOverplayerViewController: UIViewController, UITableViewDelegate, UIT
                     op.systemName = toAdd.systemName
                     op.location = toAdd.location
                     self.refreshControl.endRefreshing()
-                    self.foundUnitsTable.reloadData()
+                    self.overplayerCollection.reloadData()
                     return
                 }
             }
@@ -132,41 +153,39 @@ class ChooseOverplayerViewController: UIViewController, UITableViewDelegate, UIT
         }
     }
     
+    // MARK: - UICollectionViewDelegate
     
-    // MARK: - UITableViewDelegate
+    /*func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        return CGSizeMake((UIScreen.mainScreen().bounds.width-30)/2, 162)
+    }*/
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.availableOverplayers.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("SimpleTableItem")
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        if (cell == nil) {
-            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "SimpleTableItem")
-        }
+        let cell: OverplayerCell = collectionView.dequeueReusableCellWithReuseIdentifier("DefaultOverplayerCell", forIndexPath: indexPath) as! OverplayerCell
         
-        cell!.textLabel!.text = self.availableOverplayers[indexPath.row].systemName
-        cell!.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-        return cell!
+        cell.image.image = UIImage(named: "tv_icon.png")
+        cell.name.text = self.availableOverplayers[indexPath.row].location
+        cell.ipAddress.text = self.availableOverplayers[indexPath.row].ipAddress
+        
+        return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("toOPControl", sender: nil)
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        self.performSegueWithIdentifier("toOPControl", sender: indexPath)
     }
     
     
     // MARK: - Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "toOPControl") {
+        if (segue.identifier == "toOPControl" && sender != nil) {
             self.refreshControl.endRefreshing()
-            let indexPath = self.foundUnitsTable.indexPathForSelectedRow
-            let op = self.availableOverplayers[indexPath!.row]
+            let indexPath: NSIndexPath = sender as! NSIndexPath
+            let op = self.availableOverplayers[indexPath.row]
             let ovc:OverplayerViewController = segue.destinationViewController as! OverplayerViewController
             ovc.op = op
         }

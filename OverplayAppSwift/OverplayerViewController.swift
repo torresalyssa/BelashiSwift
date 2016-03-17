@@ -32,7 +32,7 @@ class OverplayerViewController: UIViewController, UIWebViewDelegate {
         let url = NSURL(string: String(format: "http://%@/opp/io.overplay.mainframe/app/control/index.html?decache=%ld", self.op.ipAddress, r))
         self.webView.loadRequest(NSURLRequest(URL: url!))
         
-        self.bannerLabel.text = self.op.systemName
+        self.bannerLabel.text = self.op.location
         
     }
 
