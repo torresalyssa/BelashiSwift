@@ -6,7 +6,7 @@
 //  Copyright © 2016 App Delegates. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class Overplayer {
     
@@ -14,15 +14,38 @@ class Overplayer {
     var location : String
     var ipAddress : String
     
+    // OverplayerCell in the collection view is currently formatted to display an icon
+    // image with a 1:1 aspect ratio. Images of a different aspect ratio will look off.
+    var icon : UIImage
+    
+    class var defaultIconImage : UIImage {
+        return UIImage(named: "tv_icon.png")!
+    }
+    
     init() {
         self.systemName = ""
         self.location = ""
         self.ipAddress = ""
+        self.icon = Overplayer.defaultIconImage
     }
     
     init(name: String, location: String, ipAddress: String) {
         self.systemName = name
         self.location = location
         self.ipAddress = ipAddress
+        self.icon = Overplayer.defaultIconImage
+    }
+    
+    init(name: String, location: String, ipAddress: String, iconImage: String) {
+        self.systemName = name
+        self.location = location
+        self.ipAddress = ipAddress
+        self.icon = UIImage(named: iconImage)!
+    }
+    
+    func description() -> String {
+        return "systemName: \(self.systemName)" +
+               "location: \(self.location)" +
+               "ipAddress: \(self.ipAddress)"
     }
 }

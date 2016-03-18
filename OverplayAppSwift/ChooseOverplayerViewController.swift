@@ -171,7 +171,7 @@ class ChooseOverplayerViewController : UIViewController, UICollectionViewDelegat
         
         let cell : OverplayerCell = collectionView.dequeueReusableCellWithReuseIdentifier("DefaultOverplayerCell", forIndexPath: indexPath) as! OverplayerCell
         
-        cell.image.image = UIImage(named: "tv_icon.png")
+        cell.image.image = self.availableOverplayers[indexPath.row].icon
         cell.name.text = self.availableOverplayers[indexPath.row].location
         cell.ipAddress.text = self.availableOverplayers[indexPath.row].ipAddress
         

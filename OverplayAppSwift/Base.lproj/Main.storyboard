@@ -46,7 +46,7 @@
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sVa-V0-ox5">
                                 <rect key="frame" x="0.0" y="228" width="414" height="508"/>
-                                <color key="backgroundColor" red="0.30280072422213572" green="0.55894186380846078" blue="0.8766741071428571" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0039215686274509803" green="0.72941176470588232" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="l1o-qk-9Jm">
                                     <size key="itemSize" width="134" height="176"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -67,16 +67,16 @@
                                                         <constraint firstAttribute="width" secondItem="fEo-Za-FFd" secondAttribute="height" multiplier="1:1" id="MD4-JL-t7j"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udX-pI-heL">
-                                                    <rect key="frame" x="0.0" y="161" width="134" height="15"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OkQ-nJ-EUT">
-                                                    <rect key="frame" x="0.0" y="141" width="134" height="21"/>
+                                                    <rect key="frame" x="0.0" y="134" width="134" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udX-pI-heL">
+                                                    <rect key="frame" x="0.0" y="157" width="134" height="15"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -86,12 +86,12 @@
                                             <constraint firstItem="fEo-Za-FFd" firstAttribute="leading" secondItem="sx8-nE-5rR" secondAttribute="leadingMargin" constant="-8" id="4uP-uK-FmB"/>
                                             <constraint firstItem="fEo-Za-FFd" firstAttribute="top" secondItem="sx8-nE-5rR" secondAttribute="topMargin" constant="-8" id="6lg-ck-6hX"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="udX-pI-heL" secondAttribute="trailing" constant="-8" id="DG9-Xd-tlT"/>
+                                            <constraint firstItem="udX-pI-heL" firstAttribute="top" secondItem="OkQ-nJ-EUT" secondAttribute="bottom" constant="2" id="Dft-K5-dxe"/>
                                             <constraint firstItem="OkQ-nJ-EUT" firstAttribute="leading" secondItem="sx8-nE-5rR" secondAttribute="leadingMargin" constant="-8" id="Mce-HV-anH"/>
                                             <constraint firstItem="udX-pI-heL" firstAttribute="leading" secondItem="sx8-nE-5rR" secondAttribute="leadingMargin" constant="-8" id="NNY-83-P8V"/>
-                                            <constraint firstItem="udX-pI-heL" firstAttribute="top" secondItem="fEo-Za-FFd" secondAttribute="bottom" constant="27" id="PPK-fp-rFZ"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="OkQ-nJ-EUT" secondAttribute="trailing" constant="-8" id="Yw3-6G-smQ"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="fEo-Za-FFd" secondAttribute="trailing" constant="-8" id="lrX-hj-KeT"/>
-                                            <constraint firstItem="OkQ-nJ-EUT" firstAttribute="top" secondItem="fEo-Za-FFd" secondAttribute="bottom" constant="7" id="p96-N8-qx9"/>
+                                            <constraint firstItem="OkQ-nJ-EUT" firstAttribute="top" secondItem="fEo-Za-FFd" secondAttribute="bottom" id="p96-N8-qx9"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="image" destination="fEo-Za-FFd" id="5r4-Ef-mhN"/>
