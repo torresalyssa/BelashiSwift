@@ -8,7 +8,7 @@
 
 import Foundation
 
-class NetUtils: NSObject {
+class NetUtils : NSObject {
     
     static func getWifiAddress() -> String? {
         var address : String?
@@ -33,7 +33,7 @@ class NetUtils: NSObject {
     }
     
     static func getIPAddress(address:  NSData) -> String? {
-        var ipAddress: String?
+        var ipAddress : String?
         var sa = sockaddr()
         
         address.getBytes(&sa, length: sizeof(sockaddr))

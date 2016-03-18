@@ -8,11 +8,11 @@
 
 import UIKit
 
-class OverplayerViewController: UIViewController, UIWebViewDelegate {
+class OverplayerViewController : UIViewController, UIWebViewDelegate {
     
-    @IBOutlet var bannerLabel: UILabel!
-    @IBOutlet var webView: UIWebView!
-    @IBAction func disme(sender: UIButton) {
+    @IBOutlet var bannerLabel : UILabel!
+    @IBOutlet var webView : UIWebView!
+    @IBAction func disme(sender : UIButton) {
         self.navigationController?.popViewControllerAnimated(true)
     }
     

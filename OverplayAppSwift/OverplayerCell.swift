@@ -9,7 +9,7 @@
 import UIKit
 
 class OverplayerCell: UICollectionViewCell {
-    @IBOutlet var image: UIImageView!
-    @IBOutlet var name: UILabel!
-    @IBOutlet var ipAddress: UILabel!
+    @IBOutlet var image : UIImageView!
+    @IBOutlet var name : UILabel!
+    @IBOutlet var ipAddress : UILabel!
 }

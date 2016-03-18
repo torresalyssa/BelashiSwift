@@ -8,8 +8,21 @@
 
 import Foundation
 
-class Overplayer: NSObject {
-    var ipAddress = ""
-    var systemName = ""
-    var location = ""
+class Overplayer {
+    
+    var systemName : String
+    var location : String
+    var ipAddress : String
+    
+    init() {
+        self.systemName = ""
+        self.location = ""
+        self.ipAddress = ""
+    }
+    
+    init(name: String, location: String, ipAddress: String) {
+        self.systemName = name
+        self.location = location
+        self.ipAddress = ipAddress
+    }
 }

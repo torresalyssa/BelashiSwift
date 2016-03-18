@@ -9,17 +9,17 @@
 import UIKit
 import CocoaAsyncSocket
 
-class ChooseOverplayerViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, GCDAsyncUdpSocketDelegate {
-
-    @IBOutlet var mainStatusLabel: UILabel!
-    @IBOutlet var overplayerCollection: UICollectionView!
+class ChooseOverplayerViewController : UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, GCDAsyncUdpSocketDelegate {
+ 
+    @IBOutlet var mainStatusLabel : UILabel!
+    @IBOutlet var overplayerCollection : UICollectionView!
     
     var availableOverplayers = [Overplayer]()
     var iphoneIPAddress = ""
-    var refreshControl: UIRefreshControl!
-    var socket: GCDAsyncUdpSocket!
+    var refreshControl : UIRefreshControl!
+    var socket : GCDAsyncUdpSocket!
     
-    let PORT: UInt16 = 9090
+    let PORT : UInt16 = 9090
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
@@ -56,23 +56,24 @@ class ChooseOverplayerViewController: UIViewController, UICollectionViewDelegate
         self.overplayerCollection.alwaysBounceVertical = true
         
         // For testing
-        let op1 = Overplayer()
-        op1.ipAddress = "127.34.5.9"
-        op1.systemName = "Overplayer"
-        op1.location = "Bar"
+        let op1 = Overplayer(name: "Overplayer", location: "Bar", ipAddress: "127.34.5.9")
         self.availableOverplayers.append(op1)
         
-        let op2 = Overplayer()
-        op2.ipAddress = "128.0.5.9"
-        op2.systemName = "Overplayer"
-        op2.location = "Pool Table"
+        let op2 = Overplayer(name: "Overplayer", location: "Pool Table", ipAddress: "128.0.5.9")
         self.availableOverplayers.append(op2)
         
-        let op3 = Overplayer()
-        op3.ipAddress = "127.2.5.9"
-        op3.systemName = "Overplayer"
-        op3.location = "Back Room"
+        let op3 = Overplayer(name: "Overplayer", location: "Back Room", ipAddress: "127.2.5.9")
         self.availableOverplayers.append(op3)
+        
+        let op4 = Overplayer(name: "Overplayer", location: "Somewhere", ipAddress: "128.10.5.9")
+        self.availableOverplayers.append(op4)
+        
+        let op5 = Overplayer(name: "Overplayer", location: "Here", ipAddress: "128.10.6.9")
+        self.availableOverplayers.append(op5)
+        
+        let op6 = Overplayer(name: "Overplayer", location: "There", ipAddress: "128.23.5.9")
+        self.availableOverplayers.append(op6)
+
         
         self.findOverplayers()
     }
@@ -168,7 +169,7 @@ class ChooseOverplayerViewController: UIViewController, UICollectionViewDelegate
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        let cell: OverplayerCell = collectionView.dequeueReusableCellWithReuseIdentifier("DefaultOverplayerCell", forIndexPath: indexPath) as! OverplayerCell
+        let cell : OverplayerCell = collectionView.dequeueReusableCellWithReuseIdentifier("DefaultOverplayerCell", forIndexPath: indexPath) as! OverplayerCell
         
         cell.image.image = UIImage(named: "tv_icon.png")
         cell.name.text = self.availableOverplayers[indexPath.row].location
@@ -189,7 +190,7 @@ class ChooseOverplayerViewController: UIViewController, UICollectionViewDelegate
             self.refreshControl.endRefreshing()
             let indexPath: NSIndexPath = sender as! NSIndexPath
             let op = self.availableOverplayers[indexPath.row]
-            let ovc:OverplayerViewController = segue.destinationViewController as! OverplayerViewController
+            let ovc : OverplayerViewController = segue.destinationViewController as! OverplayerViewController
             ovc.op = op
         }
     }
