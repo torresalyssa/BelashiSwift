@@ -56,8 +56,10 @@ class ChooseOverplayerViewController : UIViewController, UICollectionViewDelegat
         self.overplayerCollection.alwaysBounceVertical = true
         
         // For testing
-        let op1 = Overplayer(name: "Overplayer", location: "Bar", ipAddress: "127.34.5.9")
-        self.availableOverplayers.append(op1)
+        if let address = NetUtils.getWifiAddress() {
+            let op1 = Overplayer(name: "Overplayer", location: "AmstelBright", ipAddress: address)
+            self.availableOverplayers.append(op1)
+        }
         
         let op2 = Overplayer(name: "Overplayer", location: "Pool Table", ipAddress: "128.0.5.9")
         self.availableOverplayers.append(op2)
