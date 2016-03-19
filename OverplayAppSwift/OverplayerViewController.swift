@@ -71,6 +71,7 @@ class OverplayerViewController : UIViewController, UIWebViewDelegate {
             let url = String(format: "http://%@/opp/io.overplay.mainframe/app/control/index.html", self.op.ipAddress)
             self.alamofireManager!.request(.GET, url)
                 .responseData { response in
+                    print(response)
                     print(response.result.isFailure)
                     if (response.result.isFailure) {
                         print("Overplayer died")
