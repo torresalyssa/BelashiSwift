@@ -38,7 +38,7 @@ class OverplayerViewController : UIViewController, UIWebViewDelegate {
         
         let r = arc4random_uniform(100000)
         
-        if self.respondsToSelector(Selector("setAutomaticallyAdjustsScrollViewInsets")) {
+        if self.respondsToSelector(Selector("automaticallyAdjustsScrollViewInsets")) {
             self.automaticallyAdjustsScrollViewInsets = false
         }
         
