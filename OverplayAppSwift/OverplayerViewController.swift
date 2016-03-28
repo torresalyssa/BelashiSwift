@@ -63,6 +63,7 @@ class OverplayerViewController : UIViewController, UIWebViewDelegate {
     }
     
     func webViewDidFinishLoad(webView: UIWebView) {
+        print("loaded web view")
         self.hud.dismiss()
     }
     
@@ -71,16 +72,20 @@ class OverplayerViewController : UIViewController, UIWebViewDelegate {
             let url = String(format: "http://%@/opp/io.overplay.mainframe/app/control/index.html", self.op.ipAddress)
             self.alamofireManager!.request(.GET, url)
                 .responseData { response in
-                    print(response)
-                    print(response.result.isFailure)
+                    print(response.response)
+                    print("Overplayer dead: \(response.result.isFailure)")
                     if (response.result.isFailure) {
                         print("Overplayer died")
                         self.timer.invalidate()
-                        self.hud.dismiss()
                         
-                        let alertController = UIAlertController(title: "Overplay", message: "It looks like this Overplayer has shut down!", preferredStyle: UIAlertControllerStyle.Alert)
-                        alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: {alert in self.navigationController?.popViewControllerAnimated(true)}))
-                        self.presentViewController(alertController, animated: true, completion: nil)
+                        // run UI stuff on main thread 
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self.hud.dismiss()
+            
+                            let alertController = UIAlertController(title: "Overplay", message: "It looks like this Overplayer has shut down!", preferredStyle: UIAlertControllerStyle.Alert)
+                            alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: {alert in self.navigationController?.popViewControllerAnimated(true)}))
+                            self.presentViewController(alertController, animated: true, completion: nil)
+                        }
                     }
             }
         }
