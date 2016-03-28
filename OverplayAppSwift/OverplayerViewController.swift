@@ -10,11 +10,11 @@ import UIKit
 import Alamofire
 import JGProgressHUD
 
-class OverplayerViewController : UIViewController, UIWebViewDelegate {
+class OverplayerViewController: UIViewController, UIWebViewDelegate {
     
-    @IBOutlet var bannerLabel : UILabel!
-    @IBOutlet var webView : UIWebView!
-    @IBAction func disme(sender : UIButton) {
+    @IBOutlet var bannerLabel: UILabel!
+    @IBOutlet var webView: UIWebView!
+    @IBAction func disme(sender: UIButton) {
         self.timer.invalidate()
         self.hud.dismiss()
         self.navigationController?.popViewControllerAnimated(true)
@@ -71,14 +71,16 @@ class OverplayerViewController : UIViewController, UIWebViewDelegate {
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
             let url = String(format: "http://%@/opp/io.overplay.mainframe/app/control/index.html", self.op.ipAddress)
             self.alamofireManager!.request(.GET, url)
+                
                 .responseData { response in
                     print(response.response)
                     print("Overplayer dead: \(response.result.isFailure)")
+                    
                     if (response.result.isFailure) {
                         print("Overplayer died")
                         self.timer.invalidate()
                         
-                        // run UI stuff on main thread 
+                        // run UI stuff on main thread
                         dispatch_async(dispatch_get_main_queue()) {
                             self.hud.dismiss()
             

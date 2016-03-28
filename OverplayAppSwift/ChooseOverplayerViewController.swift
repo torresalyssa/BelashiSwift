@@ -23,6 +23,17 @@ class ChooseOverplayerViewController : UIViewController, UICollectionViewDelegat
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
+        
+        if AppSettings.sharedInstance.isLoggedIn {
+            print("Logged in as \(AppSettings.sharedInstance.username).")
+        } else {
+            print("Not logged in.")
+            self.performSegueWithIdentifier("toLogin", sender: self)
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
     }
 
     override func viewDidLoad() {
@@ -188,8 +199,9 @@ class ChooseOverplayerViewController : UIViewController, UICollectionViewDelegat
     // MARK: - Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        self.refreshControl.endRefreshing()
+        
         if (segue.identifier == "toOPControl" && sender != nil) {
-            self.refreshControl.endRefreshing()
             let indexPath: NSIndexPath = sender as! NSIndexPath
             let op = self.availableOverplayers[indexPath.row]
             let ovc : OverplayerViewController = segue.destinationViewController as! OverplayerViewController
