@@ -23,13 +23,6 @@ class ChooseOverplayerViewController : UIViewController, UICollectionViewDelegat
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        
-        if AppSettings.sharedInstance.isLoggedIn {
-            print("Logged in as \(AppSettings.sharedInstance.username).")
-        } else {
-            print("Not logged in.")
-            self.performSegueWithIdentifier("toLogin", sender: self)
-        }
     }
     
     override func viewDidAppear(animated: Bool) {
