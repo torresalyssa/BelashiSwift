@@ -245,6 +245,10 @@
         <scene sceneID="fzr-Eo-eW2">
             <objects>
                 <viewController storyboardIdentifier="signInForm" id="vX5-HD-yne" customClass="SignInViewController" customModule="OverplayAppSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7gu-2v-nNR"/>
+                        <viewControllerLayoutGuide type="bottom" id="HU2-h3-QPN"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6M8-cI-Owq">
                         <rect key="frame" x="0.0" y="0.0" width="248" height="258"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -309,6 +313,10 @@
         <scene sceneID="GaS-G2-LdT">
             <objects>
                 <viewController storyboardIdentifier="signUpForm" id="Jmf-js-mmY" customClass="SignUpViewController" customModule="OverplayAppSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cKp-uU-eHv"/>
+                        <viewControllerLayoutGuide type="bottom" id="iNW-ne-5ky"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="uMV-oN-FvB">
                         <rect key="frame" x="0.0" y="0.0" width="248" height="258"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -34,7 +34,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         
         // TODO: sign in
         else {
-            print("Signing in...")
+            OCS.sharedInstance.signIn(self.email.text!, password: self.password.text!)
         }
     }
     

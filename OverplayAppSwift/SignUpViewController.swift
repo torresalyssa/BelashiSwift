@@ -53,7 +53,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
         // TODO: sign up
         else {
-            print("Signing up...")
+            OCS.sharedInstance.signUp(self.email.text!, password: self.password.text!)
         }
     }
     

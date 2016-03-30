@@ -15,6 +15,7 @@
 		4FA87BD61CAC80310048B006 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA87BD51CAC80310048B006 /* SignInViewController.swift */; };
 		4FA87BD81CAC80460048B006 /* NetUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA87BD71CAC80460048B006 /* NetUtils.swift */; };
 		4FA87BDA1CAC80D60048B006 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA87BD91CAC80D60048B006 /* AppDelegate.swift */; };
+		4FA87BE31CAC86A10048B006 /* OCS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA87BE21CAC86A10048B006 /* OCS.swift */; };
 		4FC232371C863577006987F7 /* ChooseOverplayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC232361C863577006987F7 /* ChooseOverplayerViewController.swift */; };
 		4FC2323A1C863577006987F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FC232381C863577006987F7 /* Main.storyboard */; };
 		4FC2323C1C863577006987F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FC2323B1C863577006987F7 /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 		4FA87BD51CAC80310048B006 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		4FA87BD71CAC80460048B006 /* NetUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetUtils.swift; sourceTree = "<group>"; };
 		4FA87BD91CAC80D60048B006 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4FA87BE21CAC86A10048B006 /* OCS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCS.swift; sourceTree = "<group>"; };
 		4FC232311C863577006987F7 /* OverplayAppSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OverplayAppSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FC232361C863577006987F7 /* ChooseOverplayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseOverplayerViewController.swift; sourceTree = "<group>"; };
 		4FC232391C863577006987F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -79,6 +81,43 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		4FA87BDC1CAC84870048B006 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				4FA87BD91CAC80D60048B006 /* AppDelegate.swift */,
+				4FC232401C863577006987F7 /* Info.plist */,
+				4F1AFC9A1C9214D10089B82C /* OverplayAppSwift-Bridging-Header.h */,
+				4F1795791C9CA3AF006C0B74 /* Style.swift */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
+		4FA87BDD1CAC84CA0048B006 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4F1AFC901C8F5E750089B82C /* Overplayer.swift */,
+				4F5A4C221CA9C59200C5EAED /* Account.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		4FA87BDF1CAC86440048B006 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				4FA87BD71CAC80460048B006 /* NetUtils.swift */,
+				4FA87BE21CAC86A10048B006 /* OCS.swift */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		4FA87BE11CAC867A0048B006 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4F1AFC9D1C9B53A30089B82C /* OverplayerCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		4FC232281C863577006987F7 = {
 			isa = PBXGroup;
 			children = (
@@ -100,18 +139,14 @@
 		4FC232331C863577006987F7 /* OverplayAppSwift */ = {
 			isa = PBXGroup;
 			children = (
+				4FA87BDC1CAC84870048B006 /* Application */,
+				4FA87BDD1CAC84CA0048B006 /* Models */,
+				4FA87BE11CAC867A0048B006 /* Views */,
 				4FA87BDB1CAC82D10048B006 /* Controllers */,
-				4FA87BD91CAC80D60048B006 /* AppDelegate.swift */,
-				4F5A4C221CA9C59200C5EAED /* Account.swift */,
-				4FA87BD71CAC80460048B006 /* NetUtils.swift */,
-				4F1795791C9CA3AF006C0B74 /* Style.swift */,
+				4FA87BDF1CAC86440048B006 /* Library */,
 				4FC232381C863577006987F7 /* Main.storyboard */,
-				4F1AFC9D1C9B53A30089B82C /* OverplayerCell.swift */,
-				4F1AFC901C8F5E750089B82C /* Overplayer.swift */,
 				4FC2323B1C863577006987F7 /* Assets.xcassets */,
 				4FC2323D1C863577006987F7 /* LaunchScreen.storyboard */,
-				4FC232401C863577006987F7 /* Info.plist */,
-				4F1AFC9A1C9214D10089B82C /* OverplayAppSwift-Bridging-Header.h */,
 			);
 			path = OverplayAppSwift;
 			sourceTree = "<group>";
@@ -256,6 +291,7 @@
 				4FA87BD81CAC80460048B006 /* NetUtils.swift in Sources */,
 				4FA87BD61CAC80310048B006 /* SignInViewController.swift in Sources */,
 				4FC232371C863577006987F7 /* ChooseOverplayerViewController.swift in Sources */,
+				4FA87BE31CAC86A10048B006 /* OCS.swift in Sources */,
 				4F17957A1C9CA3AF006C0B74 /* Style.swift in Sources */,
 				4F5A4C231CA9C59200C5EAED /* Account.swift in Sources */,
 			);
