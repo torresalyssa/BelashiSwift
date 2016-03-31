@@ -10,6 +10,7 @@ import UIKit
 
 protocol SignUpDelegate {
     func gotoSignIn()
+    func gotoChooseOverplayer()
 }
 
 class SignUpViewController: UIViewController, UITextFieldDelegate {
@@ -44,6 +45,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             
         // check both passwords match
         else if self.password.text != self.reEnteredPassword.text {
+            
             let alertController = UIAlertController(title: "Password", message: "Passwords do not match!", preferredStyle: UIAlertControllerStyle.Alert)
             
             alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
@@ -54,6 +56,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         // TODO: sign up
         else {
             OCS.sharedInstance.signUp(self.email.text!, password: self.password.text!)
+            self.delegate?.gotoChooseOverplayer()
         }
     }
     

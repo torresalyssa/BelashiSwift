@@ -11,6 +11,7 @@ import JGProgressHUD
 
 protocol SignInDelegate {
     func gotoSignUp()
+    func gotoChooseOverplayer()
 }
 
 class SignInViewController: UIViewController, UITextFieldDelegate {
@@ -35,6 +36,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         // TODO: sign in
         else {
             OCS.sharedInstance.signIn(self.email.text!, password: self.password.text!)
+            self.delegate?.gotoChooseOverplayer()
         }
     }
     

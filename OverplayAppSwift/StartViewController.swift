@@ -55,6 +55,10 @@ class StartViewController: UIViewController, SignInDelegate, SignUpDelegate {
         self.activeViewController = self.signInViewController
     }
     
+    func gotoChooseOverplayer() {
+        self.performSegueWithIdentifier("toChooseOverplayer", sender: nil)
+    }
+    
     func removeInactiveViewController(inactiveViewController: UIViewController?) {
         if inactiveViewController != nil {
             inactiveViewController!.willMoveToParentViewController(nil)
