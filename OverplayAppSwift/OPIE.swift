@@ -10,15 +10,16 @@ import UIKit
 
 class OPIE {
     
-    var systemName : String
-    var location : String
-    var ipAddress : String
+    var systemName: String
+    var location: String
+    var ipAddress: String
+    var lastHeardFrom: NSDate?
     
     // OverplayerCell in the collection view is currently formatted to display an icon
     // image with a 1:1 aspect ratio. Images of a different aspect ratio will look off.
-    var icon : UIImage
+    var icon: UIImage
     
-    class var defaultIconImage : UIImage {
+    class var defaultIconImage: UIImage {
         return UIImage(named: "tv_icon.png")!
     }
     
@@ -29,23 +30,26 @@ class OPIE {
         self.icon = OPIE.defaultIconImage
     }
     
-    init(name: String, location: String, ipAddress: String) {
+    init(name: String, location: String, ipAddress: String, time: NSDate) {
         self.systemName = name
         self.location = location
         self.ipAddress = ipAddress
+        self.lastHeardFrom = time
         self.icon = OPIE.defaultIconImage
     }
     
-    init(name: String, location: String, ipAddress: String, iconImage: String) {
+    init(name: String, location: String, ipAddress: String, time: NSDate, iconImage: String) {
         self.systemName = name
         self.location = location
         self.ipAddress = ipAddress
+        self.lastHeardFrom = time
         self.icon = UIImage(named: iconImage)!
     }
     
     func description() -> String {
-        return "systemName: \(self.systemName)" +
-               "location: \(self.location)" +
-               "ipAddress: \(self.ipAddress)"
+        return "systemName: \(self.systemName) " +
+               "location: \(self.location) " +
+               "ipAddress: \(self.ipAddress) " +
+               "lastHeardFrom: \(self.lastHeardFrom)"
     }
 }

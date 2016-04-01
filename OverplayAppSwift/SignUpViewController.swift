@@ -56,6 +56,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         // TODO: sign up
         else {
             OCS.sharedInstance.signUp(self.email.text!, password: self.password.text!)
+            
+            // TODO: set account username and email on success
+            
             self.delegate?.gotoChooseOverplayer()
         }
     }

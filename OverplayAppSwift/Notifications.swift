@@ -8,5 +8,6 @@
 
 struct Notifications {
     static var newOPIE = "newOPIE"
+    static var droppedOPIE = "droppedOPIE"
     static var OPIESocketError = "OPIESocketError"
 }

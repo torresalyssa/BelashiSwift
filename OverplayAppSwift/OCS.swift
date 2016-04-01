@@ -13,8 +13,9 @@ class OCS {
     
     static let sharedInstance = OCS()
     
-    func signIn(username: String, password: String) {
+    func signIn(username: String, password: String) -> Bool {
         print("OCS signing in")
+        return true
     }
     
     func signUp(username: String, password: String) {

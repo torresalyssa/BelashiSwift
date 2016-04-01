@@ -35,7 +35,11 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         
         // TODO: sign in
         else {
-            OCS.sharedInstance.signIn(self.email.text!, password: self.password.text!)
+            if OCS.sharedInstance.signIn(self.email.text!, password: self.password.text!) {
+                Account.sharedInstance.username = self.email.text!
+                Account.sharedInstance.password = self.password.text!
+            }
+            
             self.delegate?.gotoChooseOverplayer()
         }
     }
