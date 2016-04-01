@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Overplayer {
+class OPIE {
     
     var systemName : String
     var location : String
@@ -26,14 +26,14 @@ class Overplayer {
         self.systemName = ""
         self.location = ""
         self.ipAddress = ""
-        self.icon = Overplayer.defaultIconImage
+        self.icon = OPIE.defaultIconImage
     }
     
     init(name: String, location: String, ipAddress: String) {
         self.systemName = name
         self.location = location
         self.ipAddress = ipAddress
-        self.icon = Overplayer.defaultIconImage
+        self.icon = OPIE.defaultIconImage
     }
     
     init(name: String, location: String, ipAddress: String, iconImage: String) {

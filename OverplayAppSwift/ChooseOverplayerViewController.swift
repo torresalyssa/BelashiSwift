@@ -7,19 +7,17 @@
 //
 
 import UIKit
-import CocoaAsyncSocket
 
-class ChooseOverplayerViewController : UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, GCDAsyncUdpSocketDelegate {
+class ChooseOverplayerViewController : UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
  
-    @IBOutlet var mainStatusLabel : UILabel!
+    
+    @IBOutlet weak var mainStatusLabel: UILabel!
     @IBOutlet var overplayerCollection : UICollectionView!
     
-    var availableOverplayers = [Overplayer]()
+    let nc = NSNotificationCenter.defaultCenter()
+    var availableOPIEs = [OPIE]()
     var iphoneIPAddress = ""
     var refreshControl : UIRefreshControl!
-    var socket : GCDAsyncUdpSocket!
-    
-    let PORT : UInt16 = 9090
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
@@ -32,27 +30,16 @@ class ChooseOverplayerViewController : UIViewController, UICollectionViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Setup UDP socket
-        self.socket = GCDAsyncUdpSocket(delegate: self, delegateQueue: dispatch_get_main_queue())
-
-        do {
-            try self.socket.bindToPort(PORT)
-        } catch {
-            print("Socket failed to bind to port %d", PORT)
-        }
+        self.availableOPIEs = OPIEBeaconListener.sharedInstance.opies
         
-        do {
-            try self.socket.beginReceiving()
-        } catch {
-            self.socket.close()
-            print("Socket failed to begin receiving.")
-        }
+        // Register for OPIE notifications
+        nc.addObserver(self, selector: "newOPIE", name: Notifications.newOPIE, object: nil)
+        nc.addObserver(self, selector: "opieSocketError", name: Notifications.OPIESocketError, object: nil)
         
         // Setup collection view
         self.overplayerCollection.dataSource = self
         self.overplayerCollection.delegate = self
         self.overplayerCollection.allowsMultipleSelection = false
-        
         
         self.refreshControl = UIRefreshControl()
         self.refreshControl.addTarget(self, action: Selector("findOverplayers"), forControlEvents: UIControlEvents.ValueChanged)
@@ -61,25 +48,24 @@ class ChooseOverplayerViewController : UIViewController, UICollectionViewDelegat
         
         // For testing
         if let address = NetUtils.getWifiAddress() {
-            let op1 = Overplayer(name: "Overplayer", location: "AmstelBright", ipAddress: address)
-            self.availableOverplayers.append(op1)
+            let op1 = OPIE(name: "Overplayer", location: "AmstelBright", ipAddress: address)
+            self.availableOPIEs.append(op1)
         }
         
-        let op2 = Overplayer(name: "Overplayer", location: "Pool Table", ipAddress: "128.0.5.9")
-        self.availableOverplayers.append(op2)
+        let op2 = OPIE(name: "Overplayer", location: "Pool Table", ipAddress: "128.0.5.9")
+        self.availableOPIEs.append(op2)
         
-        let op3 = Overplayer(name: "Overplayer", location: "Back Room", ipAddress: "127.2.5.9")
-        self.availableOverplayers.append(op3)
+        let op3 = OPIE(name: "Overplayer", location: "Back Room", ipAddress: "127.2.5.9")
+        self.availableOPIEs.append(op3)
         
-        let op4 = Overplayer(name: "Overplayer", location: "Somewhere", ipAddress: "128.10.5.9")
-        self.availableOverplayers.append(op4)
+        let op4 = OPIE(name: "Overplayer", location: "Somewhere", ipAddress: "128.10.5.9")
+        self.availableOPIEs.append(op4)
         
-        let op5 = Overplayer(name: "Overplayer", location: "Here", ipAddress: "128.10.6.9")
-        self.availableOverplayers.append(op5)
+        let op5 = OPIE(name: "Overplayer", location: "Here", ipAddress: "128.10.6.9")
+        self.availableOPIEs.append(op5)
         
-        let op6 = Overplayer(name: "Overplayer", location: "There", ipAddress: "128.23.5.9")
-        self.availableOverplayers.append(op6)
-
+        let op6 = OPIE(name: "Overplayer", location: "There", ipAddress: "128.23.5.9")
+        self.availableOPIEs.append(op6)
         
         self.findOverplayers()
     }
@@ -88,12 +74,27 @@ class ChooseOverplayerViewController : UIViewController, UICollectionViewDelegat
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func newOPIE() {
+        self.refreshControl.endRefreshing()
+        
+        //self.availableOPIEs = OPIEBeaconListener.sharedInstance.opies
+        // for testing...
+        self.availableOPIEs.appendContentsOf(OPIEBeaconListener.sharedInstance.opies)
+        
+        self.sortByIPAndReload()
+    }
+    
+    func opieSocketError() {
+        let alertController = UIAlertController(title: "OPIE Locator", message: "There was an error locating OPIEs.", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
 
     func findOverplayers() {
         self.refreshControl.beginRefreshing()
-        
-        // Took this out for testing purposes. Add back in!
-        //self.availableOverplayers = []
         
         if let address = NetUtils.getWifiAddress() {
             self.mainStatusLabel.text = String(format: "My IP: \(address)")
@@ -102,8 +103,7 @@ class ChooseOverplayerViewController : UIViewController, UICollectionViewDelegat
             self.refreshControl.endRefreshing()
         }
         
-        // This stops the spinner if we have seen no UDP packets in 10s, and also clears the list of overplayers.
-        // May need to adjust wait time depending on how often overplayers broadcast.
+        // Stops the spinner if we have seen no UDP packets in 10s
         NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: Selector("stopRefresh"), userInfo: nil, repeats: false)
     }
     
@@ -113,9 +113,8 @@ class ChooseOverplayerViewController : UIViewController, UICollectionViewDelegat
     }
     
     func sortByIPAndReload() {
-        self.availableOverplayers.sortInPlace {
-            (a : Overplayer, b : Overplayer) -> Bool in
-            
+        self.availableOPIEs.sortInPlace {
+            (a : OPIE, b : OPIE) -> Bool in
             let comp = a.ipAddress.compare(b.ipAddress, options: NSStringCompareOptions.NumericSearch)
             if comp == NSComparisonResult.OrderedAscending {
                 return true
@@ -126,60 +125,19 @@ class ChooseOverplayerViewController : UIViewController, UICollectionViewDelegat
         self.overplayerCollection.reloadData()
     }
     
-    
-    // MARK: - GCDAsyncUdpSocket
-    
-    func udpSocket(sock: GCDAsyncUdpSocket!, didReceiveData data: NSData!, fromAddress address: NSData!, withFilterContext filterContext: AnyObject!) {
-        
-        let toAdd = Overplayer()
-        do {
-            let overplayerJson = try NSJSONSerialization.JSONObjectWithData(data, options:[])
-            if let name = overplayerJson["name"] as? String {
-                toAdd.systemName = name
-            }
-            if let location = overplayerJson["location"] as? String {
-                toAdd.location = location
-            }
-        } catch {
-            print("Error reading UDP JSON.")
-            return
-        }
-        
-        if let ipAddress = NetUtils.getIPAddress(address) {
-            
-            for op in self.availableOverplayers {
-                if op.ipAddress == ipAddress {
-                    op.systemName = toAdd.systemName
-                    op.location = toAdd.location
-                    self.refreshControl.endRefreshing()
-                    self.overplayerCollection.reloadData()
-                    return
-                }
-            }
-            toAdd.ipAddress = ipAddress
-            self.availableOverplayers.append(toAdd)
-            self.refreshControl.endRefreshing()
-            self.sortByIPAndReload()
-        }
-    }
-    
     // MARK: - UICollectionViewDelegate
     
-    /*func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake((UIScreen.mainScreen().bounds.width-30)/2, 162)
-    }*/
-    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.availableOverplayers.count
+        return self.availableOPIEs.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell : OverplayerCell = collectionView.dequeueReusableCellWithReuseIdentifier("DefaultOverplayerCell", forIndexPath: indexPath) as! OverplayerCell
         
-        cell.image.image = self.availableOverplayers[indexPath.row].icon
-        cell.name.text = self.availableOverplayers[indexPath.row].location
-        cell.ipAddress.text = self.availableOverplayers[indexPath.row].ipAddress
+        cell.image.image = self.availableOPIEs[indexPath.row].icon
+        cell.name.text = self.availableOPIEs[indexPath.row].location
+        cell.ipAddress.text = self.availableOPIEs[indexPath.row].ipAddress
         
         return cell
     }
@@ -196,7 +154,7 @@ class ChooseOverplayerViewController : UIViewController, UICollectionViewDelegat
         
         if (segue.identifier == "toOPControl" && sender != nil) {
             let indexPath: NSIndexPath = sender as! NSIndexPath
-            let op = self.availableOverplayers[indexPath.row]
+            let op = self.availableOPIEs[indexPath.row]
             let ovc : OverplayerViewController = segue.destinationViewController as! OverplayerViewController
             ovc.op = op
         }

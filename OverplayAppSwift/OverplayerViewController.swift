@@ -20,7 +20,7 @@ class OverplayerViewController: UIViewController, UIWebViewDelegate {
         self.navigationController?.popViewControllerAnimated(true)
     }
     
-    var op = Overplayer()
+    var op = OPIE()
     var timer = NSTimer()
     var interval = 10  // seconds
     var hud : JGProgressHUD!

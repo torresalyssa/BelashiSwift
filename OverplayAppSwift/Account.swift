@@ -30,9 +30,13 @@ class Account {
         }
     }
     
-    init() {
-        username = ""
-        password = ""
+    var launchedBefore: Bool {
+        get {
+            return NSUserDefaults.standardUserDefaults().boolForKey("launchedBefore")
+        }
+        set {
+            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "launchedBefore")
+        }
     }
 }
 

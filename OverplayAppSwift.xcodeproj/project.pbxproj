@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4F17957A1C9CA3AF006C0B74 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1795791C9CA3AF006C0B74 /* Style.swift */; };
-		4F1AFC911C8F5E750089B82C /* Overplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AFC901C8F5E750089B82C /* Overplayer.swift */; };
+		4F1AFC911C8F5E750089B82C /* OPIE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AFC901C8F5E750089B82C /* OPIE.swift */; };
 		4F1AFC9E1C9B53A30089B82C /* OverplayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AFC9D1C9B53A30089B82C /* OverplayerCell.swift */; };
 		4F5A4C231CA9C59200C5EAED /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5A4C221CA9C59200C5EAED /* Account.swift */; };
 		4F5A4C271CA9D45400C5EAED /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5A4C261CA9D45400C5EAED /* SignUpViewController.swift */; };
@@ -21,6 +21,8 @@
 		4FC2323C1C863577006987F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FC2323B1C863577006987F7 /* Assets.xcassets */; };
 		4FC2323F1C863577006987F7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FC2323D1C863577006987F7 /* LaunchScreen.storyboard */; };
 		4FC232471C8637FC006987F7 /* OverplayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC232461C8637FC006987F7 /* OverplayerViewController.swift */; };
+		4FEA0CF51CADEED3005C8CB1 /* OPIEBeaconListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEA0CF41CADEED3005C8CB1 /* OPIEBeaconListener.swift */; };
+		4FEA0CF71CADF71E005C8CB1 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEA0CF61CADF71E005C8CB1 /* Notifications.swift */; };
 		4FFF50711CAC433D00952DB8 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFF50701CAC433D00952DB8 /* StartViewController.swift */; };
 		C1DF3E7ED0283B6E64600954 /* Pods_OverplayAppSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CA9131026E61A775BACE4A0 /* Pods_OverplayAppSwift.framework */; };
 /* End PBXBuildFile section */
@@ -28,7 +30,7 @@
 /* Begin PBXFileReference section */
 		4CA9131026E61A775BACE4A0 /* Pods_OverplayAppSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OverplayAppSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F1795791C9CA3AF006C0B74 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
-		4F1AFC901C8F5E750089B82C /* Overplayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Overplayer.swift; sourceTree = "<group>"; };
+		4F1AFC901C8F5E750089B82C /* OPIE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OPIE.swift; sourceTree = "<group>"; };
 		4F1AFC9A1C9214D10089B82C /* OverplayAppSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OverplayAppSwift-Bridging-Header.h"; sourceTree = "<group>"; };
 		4F1AFC9D1C9B53A30089B82C /* OverplayerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverplayerCell.swift; sourceTree = "<group>"; };
 		4F5A4C221CA9C59200C5EAED /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
@@ -44,6 +46,8 @@
 		4FC2323E1C863577006987F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4FC232401C863577006987F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FC232461C8637FC006987F7 /* OverplayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverplayerViewController.swift; sourceTree = "<group>"; };
+		4FEA0CF41CADEED3005C8CB1 /* OPIEBeaconListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OPIEBeaconListener.swift; sourceTree = "<group>"; };
+		4FEA0CF61CADF71E005C8CB1 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		4FFF50701CAC433D00952DB8 /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		9391B5AEE33F9FDB39DDB969 /* Pods-OverplayAppSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OverplayAppSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-OverplayAppSwift/Pods-OverplayAppSwift.release.xcconfig"; sourceTree = "<group>"; };
 		D6FCA368956CA0A0DABBF89F /* Pods-OverplayAppSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OverplayAppSwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OverplayAppSwift/Pods-OverplayAppSwift.debug.xcconfig"; sourceTree = "<group>"; };
@@ -95,7 +99,7 @@
 		4FA87BDD1CAC84CA0048B006 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				4F1AFC901C8F5E750089B82C /* Overplayer.swift */,
+				4F1AFC901C8F5E750089B82C /* OPIE.swift */,
 				4F5A4C221CA9C59200C5EAED /* Account.swift */,
 			);
 			name = Models;
@@ -106,6 +110,8 @@
 			children = (
 				4FA87BD71CAC80460048B006 /* NetUtils.swift */,
 				4FA87BE21CAC86A10048B006 /* OCS.swift */,
+				4FEA0CF41CADEED3005C8CB1 /* OPIEBeaconListener.swift */,
+				4FEA0CF61CADF71E005C8CB1 /* Notifications.swift */,
 			);
 			name = Library;
 			sourceTree = "<group>";
@@ -284,16 +290,18 @@
 			files = (
 				4FA87BDA1CAC80D60048B006 /* AppDelegate.swift in Sources */,
 				4FFF50711CAC433D00952DB8 /* StartViewController.swift in Sources */,
-				4F1AFC911C8F5E750089B82C /* Overplayer.swift in Sources */,
+				4F1AFC911C8F5E750089B82C /* OPIE.swift in Sources */,
 				4F1AFC9E1C9B53A30089B82C /* OverplayerCell.swift in Sources */,
 				4F5A4C271CA9D45400C5EAED /* SignUpViewController.swift in Sources */,
 				4FC232471C8637FC006987F7 /* OverplayerViewController.swift in Sources */,
 				4FA87BD81CAC80460048B006 /* NetUtils.swift in Sources */,
 				4FA87BD61CAC80310048B006 /* SignInViewController.swift in Sources */,
+				4FEA0CF71CADF71E005C8CB1 /* Notifications.swift in Sources */,
 				4FC232371C863577006987F7 /* ChooseOverplayerViewController.swift in Sources */,
 				4FA87BE31CAC86A10048B006 /* OCS.swift in Sources */,
 				4F17957A1C9CA3AF006C0B74 /* Style.swift in Sources */,
 				4F5A4C231CA9C59200C5EAED /* Account.swift in Sources */,
+				4FEA0CF51CADEED3005C8CB1 /* OPIEBeaconListener.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

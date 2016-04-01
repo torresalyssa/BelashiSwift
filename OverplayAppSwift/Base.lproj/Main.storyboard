@@ -45,7 +45,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sVa-V0-ox5">
-                                <rect key="frame" x="0.0" y="229" width="414" height="508"/>
+                                <rect key="frame" x="0.0" y="228" width="414" height="508"/>
                                 <color key="backgroundColor" red="0.0039215686274509803" green="0.72941176470588232" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="l1o-qk-9Jm">
                                     <size key="itemSize" width="134" height="176"/>
@@ -74,7 +74,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udX-pI-heL">
-                                                    <rect key="frame" x="0.0" y="157" width="134" height="15"/>
+                                                    <rect key="frame" x="0.0" y="156" width="134" height="15"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -118,7 +118,7 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
-                        <outlet property="mainStatusLabel" destination="DBZ-D9-TRQ" id="9TS-xS-tet"/>
+                        <outlet property="mainStatusLabel" destination="DBZ-D9-TRQ" id="orN-pZ-0TY"/>
                         <outlet property="overplayerCollection" destination="sVa-V0-ox5" id="1mz-P2-FbW"/>
                         <segue destination="fzo-N2-r8F" kind="show" identifier="toOPControl" id="FyX-Oj-EEu"/>
                     </connections>
