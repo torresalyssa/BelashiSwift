@@ -24,26 +24,23 @@ class OverplayerViewController: UIViewController, UIWebViewDelegate {
     var timer = NSTimer()
     var interval = 10  // seconds
     var hud : JGProgressHUD!
-    var alamofireManager : Alamofire.Manager?
+    var alamofireManager : Alamofire.Manager!
     var requestTimeout = 5  // seconds
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
-        self.hud = JGProgressHUD(style: JGProgressHUDStyle.Dark)
-        self.hud.textLabel.text = "Loading"
+        self.hud = JGProgressHUD(style: JGProgressHUDStyle.Light)
+        self.hud.textLabel.text = "Loading..."
         self.hud.userInteractionEnabled = false
         self.hud.showInView(self.view)
-        
-        let r = arc4random_uniform(100000)
         
         if self.respondsToSelector(Selector("automaticallyAdjustsScrollViewInsets")) {
             self.automaticallyAdjustsScrollViewInsets = false
         }
         
         self.webView.delegate = self
-        let url = NSURL(string: String(format: "http://%@/opp/io.overplay.mainframe/app/control/index.html?decache=%ld", self.op.ipAddress, r))
+        let url = NSURL(string: self.op.getDecachedUrl())
         self.webView.loadRequest(NSURLRequest(URL: url!))
         
         self.bannerLabel.text = self.op.location
@@ -63,14 +60,13 @@ class OverplayerViewController: UIViewController, UIWebViewDelegate {
     }
     
     func webViewDidFinishLoad(webView: UIWebView) {
-        print("loaded web view")
         self.hud.dismiss()
     }
     
     func checkOverplayer() {
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
             let url = String(format: "http://%@/opp/io.overplay.mainframe/app/control/index.html", self.op.ipAddress)
-            self.alamofireManager!.request(.GET, url)
+            self.alamofireManager.request(.GET, url)
                 
                 .responseData { response in
                     print(response.response)

@@ -53,20 +53,16 @@ class OPIEBeaconListener: NSObject, GCDAsyncUdpSocketDelegate {
                 if  elapsedTime < timeBeforeDrop {
                     self.opies.append(op)
                 } else {
-                    nc.postNotificationName(Notifications.droppedOPIE, object: nil)
+                    nc.postNotificationName(Notifications.droppedOPIE, object: nil, userInfo: ["OPIE": op])
                 }
             } else {
-                nc.postNotificationName(Notifications.droppedOPIE, object: nil)
+                nc.postNotificationName(Notifications.droppedOPIE, object: nil, userInfo: ["OPIE": op])
             }
         }
         
         for op in self.opies {
             print(op.description())
         }
-    }
-    
-    func clearOPIEs() {
-        self.opies = []
     }
     
     // MARK: - GCDAsyncUdpSocket
@@ -94,12 +90,12 @@ class OPIEBeaconListener: NSObject, GCDAsyncUdpSocketDelegate {
             
             for op in self.opies {
                 
-                // uncomment when not testing
+                // comment out when testing
                 /*if op.ipAddress == ipAddress {
                     op.systemName = toAdd.systemName
                     op.location = toAdd.location
                     op.lastHeardFrom = NSDate()
-                    nc.postNotificationName(Notifications.newOPIE, object: nil)
+                    nc.postNotificationName(Notifications.newOPIE, object: nil, userInfo: ["OPIE": op])
                     return
                 }*/
                 
@@ -108,14 +104,14 @@ class OPIEBeaconListener: NSObject, GCDAsyncUdpSocketDelegate {
                     op.systemName = toAdd.systemName
                     op.location = toAdd.location
                     op.lastHeardFrom = NSDate()
-                    nc.postNotificationName(Notifications.newOPIE, object: nil)
+                    nc.postNotificationName(Notifications.newOPIE, object: nil, userInfo: ["OPIE": op])
                     return
                 }
             }
             
             toAdd.ipAddress = ipAddress
             self.opies.append(toAdd)
-            nc.postNotificationName(Notifications.newOPIE, object: nil)
+            nc.postNotificationName(Notifications.newOPIE, object: nil, userInfo: ["OPIE": toAdd])
         }
     }
 }

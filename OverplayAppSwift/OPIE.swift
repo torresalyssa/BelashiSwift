@@ -46,6 +46,11 @@ class OPIE {
         self.icon = UIImage(named: iconImage)!
     }
     
+    func getDecachedUrl() -> String {
+        let r = arc4random_uniform(100000)
+        return String(format: "http://%@/opp/io.overplay.mainframe/app/control/index.html?decache=%ld", self.ipAddress, r)
+    }
+    
     func description() -> String {
         return "systemName: \(self.systemName) " +
                "location: \(self.location) " +

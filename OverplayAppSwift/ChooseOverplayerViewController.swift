@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class ChooseOverplayerViewController : UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
  
@@ -15,9 +16,12 @@ class ChooseOverplayerViewController : UIViewController, UICollectionViewDelegat
     @IBOutlet var overplayerCollection : UICollectionView!
     
     let nc = NSNotificationCenter.defaultCenter()
+    var refreshControl : UIRefreshControl!
+    var refreshing = true
+    var hud: JGProgressHUD!
+    
     var availableOPIEs = [OPIE]()
     var iphoneIPAddress = ""
-    var refreshControl : UIRefreshControl!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
@@ -30,11 +34,15 @@ class ChooseOverplayerViewController : UIViewController, UICollectionViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.availableOPIEs = OPIEBeaconListener.sharedInstance.opies
-        
+        // Display hud
+        self.hud = JGProgressHUD(style: JGProgressHUDStyle.Light)
+        self.hud.textLabel.text = "Searching..."
+        self.hud.userInteractionEnabled = false
+        self.hud.showInView(self.view)
+
         // Register for OPIE notifications
         nc.addObserver(self, selector: "newOPIE", name: Notifications.newOPIE, object: nil)
-        nc.addObserver(self, selector: "opieSocketError", name: Notifications.OPIESocketError, object: nil)
+        nc.addObserver(self, selector: "OPIESocketError", name: Notifications.OPIESocketError, object: nil)
         nc.addObserver(self, selector: "droppedOPIE", name: Notifications.droppedOPIE, object: nil)
         
         // Setup collection view
@@ -47,12 +55,6 @@ class ChooseOverplayerViewController : UIViewController, UICollectionViewDelegat
         self.overplayerCollection.addSubview(self.refreshControl)
         self.overplayerCollection.alwaysBounceVertical = true
         
-        // For testing
-        /*if let address = NetUtils.getWifiAddress() {
-            let op1 = OPIE(name: "Overplayer", location: "AmstelBright", ipAddress: address, time: NSDate())
-            self.availableOPIEs.append(op1)
-        }*/
-        
         self.findOverplayers()
     }
 
@@ -62,20 +64,21 @@ class ChooseOverplayerViewController : UIViewController, UICollectionViewDelegat
     }
     
     func newOPIE() {
-        self.refreshControl.endRefreshing()
+        //print("New OPIE")
         self.availableOPIEs = OPIEBeaconListener.sharedInstance.opies
-        self.sortByIPAndReload()
+        self.stopRefresh()
     }
     
     func droppedOPIE() {
         print("Dropped OPIE")
-        self.refreshControl.endRefreshing()
         self.availableOPIEs = OPIEBeaconListener.sharedInstance.opies
-        print("\(self.availableOPIEs.count)")
-        self.sortByIPAndReload()
+        self.stopRefresh()
     }
     
-    func opieSocketError() {
+    func OPIESocketError() {
+        self.refreshControl.endRefreshing()
+        self.hud.dismiss()
+        
         let alertController = UIAlertController(title: "OPIE Locator", message: "There was an error locating OPIEs.", preferredStyle: UIAlertControllerStyle.Alert)
         
         alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
@@ -84,24 +87,31 @@ class ChooseOverplayerViewController : UIViewController, UICollectionViewDelegat
     }
 
     func findOverplayers() {
-        self.refreshControl.beginRefreshing()
+        self.refreshing = true
         
         if let address = NetUtils.getWifiAddress() {
             self.mainStatusLabel.text = String(format: "My IP: \(address)")
+            
+            // For testing
+            //let op1 = OPIE(name: "Overplayer", location: "AmstelBright", ipAddress: address, time: NSDate())
+            //self.availableOPIEs.append(op1)
+            
         } else {
             self.mainStatusLabel.text = "Not on a WiFi Network"
             self.refreshControl.endRefreshing()
         }
         
-        self.availableOPIEs = []
+        self.availableOPIEs = OPIEBeaconListener.sharedInstance.opies
         
-        // Stops the spinner if we have seen no UDP packets in 10s
-        NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: Selector("stopRefresh"), userInfo: nil, repeats: false)
+        // Stops the spinner if we have seen no added/dropped OPIEs in 5s
+        NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: Selector("stopRefresh"), userInfo: nil, repeats: false)
     }
     
     func stopRefresh() {
-        self.sortByIPAndReload()
+        self.refreshing = false
+        self.hud.dismiss()
         self.refreshControl.endRefreshing()
+        self.sortByIPAndReload()
     }
     
     func sortByIPAndReload() {
@@ -140,6 +150,23 @@ class ChooseOverplayerViewController : UIViewController, UICollectionViewDelegat
         self.performSegueWithIdentifier("toOPControl", sender: indexPath)
     }
     
+    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        switch kind {
+            
+        case UICollectionElementKindSectionHeader:
+            let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "headerView", forIndexPath: indexPath)
+            
+            if self.availableOPIEs.count == 0 && !self.refreshing {
+                headerView.hidden = false
+            } else {
+                headerView.hidden = true
+            }
+            return headerView
+            
+        default:
+            assert(false, "Unexpected element kind in OPIE collection view.")
+        }
+    }
     
     // MARK: - Navigation
     
