@@ -105,6 +105,7 @@
 				4F5A4C221CA9C59200C5EAED /* Account.swift */,
 				4FEA0CF41CADEED3005C8CB1 /* OPIEBeaconListener.swift */,
 				4FA87BE21CAC86A10048B006 /* OCS.swift */,
+				4FEA0CF61CADF71E005C8CB1 /* Notifications.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -113,7 +114,6 @@
 			isa = PBXGroup;
 			children = (
 				4FA87BD71CAC80460048B006 /* NetUtils.swift */,
-				4FEA0CF61CADF71E005C8CB1 /* Notifications.swift */,
 			);
 			name = Library;
 			sourceTree = "<group>";

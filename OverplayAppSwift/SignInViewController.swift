@@ -18,6 +18,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     
     var delegate: SignInDelegate?
     
+    let nc = NSNotificationCenter.defaultCenter()
+    
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var password: UITextField!
 
@@ -33,14 +35,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
             self.presentViewController(alertController, animated: true, completion: nil)
         }
         
-        // TODO: sign in
         else {
-            if OCS.sharedInstance.signIn(self.email.text!, password: self.password.text!) {
-                Account.sharedInstance.username = self.email.text!
-                Account.sharedInstance.password = self.password.text!
-            }
-            
-            self.delegate?.gotoChooseOverplayer()
+            OCS.sharedInstance.signIn(self.email.text!, password: self.password.text!)
         }
     }
     
@@ -57,10 +53,18 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.nc.addObserver(self, selector: "signInSuccess", name: Notifications.signInSuccess, object: nil)
+        
         self.email.placeholder = "Email address"
         self.email.delegate = self
         self.password.placeholder = "Password"
         self.password.delegate = self
+    }
+    
+    func signInSuccess() {
+        Account.sharedInstance.username = self.email.text
+        Account.sharedInstance.password = self.password.text
+        print("Signed in as \(Account.sharedInstance.username!)")
     }
     
     func validateEmail(emailAddr: String) -> Bool {

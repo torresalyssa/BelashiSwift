@@ -14,7 +14,11 @@ class Account {
     
     var username: String? {
         get {
-            return NSUserDefaults.standardUserDefaults().stringForKey("username")!
+            if let u = NSUserDefaults.standardUserDefaults().stringForKey("username") {
+                return u
+            } else {
+                return nil
+            }
         }
         set {
             NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "username")
