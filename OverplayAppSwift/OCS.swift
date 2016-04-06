@@ -19,21 +19,38 @@ class OCS {
     let nc = NSNotificationCenter.defaultCenter()
     
     func signIn(email: String, password: String) {
-        
         Alamofire.request(.GET, self.serverBase + "/user/hasAccount?email=" + email)
+            
             .responseJSON{response in
+                
                 switch response.response!.statusCode {
+                    
                 case 200...299:
-                    print("User found")
-                    self.authorize(email, password: password)
+                    self.authorize(email, password: password, success: Notifications.signInSuccess, fail: Notifications.signInFailure)
+                    
                 default:
-                    print("User not found")
                     self.nc.postNotificationName(Notifications.signInFailure, object: nil, userInfo: ["error": Notifications.noSuchUser])
                 }
         }
     }
     
-    func authorize(email: String, password: String) {
+    func signUp(email: String, password: String) {
+        Alamofire.request(.GET, self.serverBase + "/user/hasAccount?email=" + email)
+            
+            .responseJSON{response in
+                
+                switch response.response!.statusCode {
+                    
+                case 200...299:
+                    self.nc.postNotificationName(Notifications.signUpFailure, object: nil, userInfo: ["error": Notifications.userAlreadyExists])
+                    
+                default:
+                    self.authorize(email, password: password, success: Notifications.signUpSuccess, fail: Notifications.signUpFailure)
+                }
+        }
+    }
+    
+    func authorize(email: String, password: String, success: String, fail: String) {
     
         let params = ["email": email, "password": password]
         
@@ -51,11 +68,11 @@ class OCS {
             
                     case 200...299:
                         print("Got good status: \(statusCode)")
-                        self.nc.postNotificationName(Notifications.signInSuccess, object: nil)
+                        self.nc.postNotificationName(success, object: nil)
                         
                     default:
                         print("Got bad status: \(statusCode)")
-                        self.nc.postNotificationName(Notifications.signInFailure, object: nil, userInfo: ["error": Notifications.badStatusCode])
+                        self.nc.postNotificationName(fail, object: nil, userInfo: ["error": Notifications.badStatusCode])
                     }
                 
                 case .Failure(let error):
@@ -77,12 +94,8 @@ class OCS {
                         print("Unidentified error")
                     }
                     
-                    self.nc.postNotificationName(Notifications.signInFailure, object: nil)
+                    self.nc.postNotificationName(fail, object: nil)
                 }
             }
-    }
-    
-    func signUp(email: String, password: String) {
-        print("OCS signing up for \(email)")
     }
 }

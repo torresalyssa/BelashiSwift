@@ -31,6 +31,7 @@ class StartViewController: UIViewController, SignInDelegate, SignUpDelegate {
         super.viewDidLoad()
         
         self.nc.addObserver(self, selector: "signInFail:", name: Notifications.signInFailure, object: nil)
+        self.nc.addObserver(self, selector: "signUpFail:", name: Notifications.signUpFailure, object: nil)
         
         // check if user is already signed in
         /*if Account.sharedInstance.password != nil {
@@ -71,6 +72,41 @@ class StartViewController: UIViewController, SignInDelegate, SignUpDelegate {
         alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
         
         self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func signUpFail(notification: NSNotification) {
+        if let info = notification.userInfo as? Dictionary<String, String> {
+            if let error = info["error"] {
+                print(error)
+                
+                switch error {
+                    
+                case Notifications.userAlreadyExists:
+                    let alertController = UIAlertController(title: "Email address", message: "An account with the provided email address already exists.", preferredStyle: UIAlertControllerStyle.Alert)
+                    
+                    alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                    
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                    
+                // TODO: add more info on what a valid password should be
+                    
+                case Notifications.invalidPassword:
+                    let alertController = UIAlertController(title: "Password", message: "Password invalid.", preferredStyle: UIAlertControllerStyle.Alert)
+                    
+                    alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                    
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                    
+                default:
+                    print("HERE")
+                    let alertController = UIAlertController(title: "Sign up failed", message: "Sign up failed. Please try again.", preferredStyle: UIAlertControllerStyle.Alert)
+                    
+                    alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                    
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                }
+            }
+        }
     }
     
     func gotoChooseOverplayer() {

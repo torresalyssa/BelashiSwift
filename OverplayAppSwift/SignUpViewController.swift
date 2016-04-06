@@ -17,6 +17,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     var delegate: SignUpDelegate?
     
+    let nc = NSNotificationCenter.defaultCenter()
+    
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var reEnteredPassword: UITextField!
@@ -56,10 +58,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         // TODO: sign up
         else {
             OCS.sharedInstance.signUp(self.email.text!, password: self.password.text!)
-            
-            // TODO: set account username and email on success
-            
-            self.delegate?.gotoChooseOverplayer()
         }
     }
     
@@ -76,12 +74,20 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.nc.addObserver(self, selector: "signUpSuccess", name: Notifications.signInSuccess, object: nil)
+        
         self.email.placeholder = "Email address"
         self.email.delegate = self
         self.password.placeholder = "Password"
         self.password.delegate = self
         self.reEnteredPassword.placeholder = "Re-enter password"
         self.reEnteredPassword.delegate = self
+    }
+    
+    func signUpSuccess() {
+        Account.sharedInstance.username = self.email.text
+        Account.sharedInstance.password = self.password.text
+        print("Signed up and signed in as \(Account.sharedInstance.username!)")
     }
     
     func validateEmail(emailAddr: String) -> Bool {

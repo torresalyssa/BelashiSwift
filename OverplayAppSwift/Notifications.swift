@@ -16,10 +16,13 @@ struct Notifications {
     // OCS notification names
     static var signInSuccess = "signInSuccess"
     static var signInFailure = "signInFailure"
+    static var signUpSuccess = "signUpSuccess"
+    static var signUpFailure = "signUpFailure"
     
     // OCS userInfo errors
     static var noSuchUser = "noUserFound"
     static var badStatusCode = "badStatus"
     static var wrongPassword = "wrongPwd"
     static var invalidPassword = "invalidPwd"
+    static var userAlreadyExists = "userAlreadyExists"
 }
