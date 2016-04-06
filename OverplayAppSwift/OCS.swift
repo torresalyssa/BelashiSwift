@@ -86,15 +86,16 @@ class OCS {
                         
                     case 400:
                         print("Bad password")
+                        self.nc.postNotificationName(fail, object: nil, userInfo: ["error": Notifications.invalidPassword])
                         
                     case 403:
                         print("Wrong password")
+                        self.nc.postNotificationName(fail, object: nil, userInfo: ["error": Notifications.wrongPassword])
                         
                     default:
                         print("Unidentified error")
+                        self.nc.postNotificationName(fail, object: nil)
                     }
-                    
-                    self.nc.postNotificationName(fail, object: nil)
                 }
             }
     }
