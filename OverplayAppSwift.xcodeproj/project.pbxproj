@@ -21,6 +21,7 @@
 		4FC2323C1C863577006987F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FC2323B1C863577006987F7 /* Assets.xcassets */; };
 		4FC2323F1C863577006987F7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FC2323D1C863577006987F7 /* LaunchScreen.storyboard */; };
 		4FC232471C8637FC006987F7 /* OverplayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC232461C8637FC006987F7 /* OverplayerViewController.swift */; };
+		4FDEFA211CB574190096BDD6 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 4FDEFA201CB574190096BDD6 /* .gitignore */; };
 		4FEA0CF51CADEED3005C8CB1 /* OPIEBeaconListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEA0CF41CADEED3005C8CB1 /* OPIEBeaconListener.swift */; };
 		4FEA0CF71CADF71E005C8CB1 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEA0CF61CADF71E005C8CB1 /* Notifications.swift */; };
 		4FFF50711CAC433D00952DB8 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFF50701CAC433D00952DB8 /* StartViewController.swift */; };
@@ -46,6 +47,7 @@
 		4FC2323E1C863577006987F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4FC232401C863577006987F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FC232461C8637FC006987F7 /* OverplayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverplayerViewController.swift; sourceTree = "<group>"; };
+		4FDEFA201CB574190096BDD6 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		4FEA0CF41CADEED3005C8CB1 /* OPIEBeaconListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OPIEBeaconListener.swift; sourceTree = "<group>"; };
 		4FEA0CF61CADF71E005C8CB1 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		4FFF50701CAC433D00952DB8 /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 		4FC232281C863577006987F7 = {
 			isa = PBXGroup;
 			children = (
+				4FDEFA201CB574190096BDD6 /* .gitignore */,
 				4FC232331C863577006987F7 /* OverplayAppSwift */,
 				4FC232321C863577006987F7 /* Products */,
 				96941CD9AE346C54FAEED32A /* Pods */,
@@ -227,6 +230,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FDEFA211CB574190096BDD6 /* .gitignore in Resources */,
 				4FC2323F1C863577006987F7 /* LaunchScreen.storyboard in Resources */,
 				4FC2323C1C863577006987F7 /* Assets.xcassets in Resources */,
 				4FC2323A1C863577006987F7 /* Main.storyboard in Resources */,
