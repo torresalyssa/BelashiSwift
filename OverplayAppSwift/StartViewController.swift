@@ -80,7 +80,6 @@ class StartViewController: UIViewController, SignInDelegate, SignUpDelegate {
         
         if let info = notification.userInfo as? Dictionary<String, String> {
             if let error = info["error"] {
-                print(error)
                 
                 switch error {
                     
@@ -91,8 +90,8 @@ class StartViewController: UIViewController, SignInDelegate, SignUpDelegate {
                 // TODO: add more info on what a valid password should be
             
                 case Notifications.invalidPassword:
-                    title = "Password"
-                    message = "Password invalid."
+                    title = "Password too short"
+                    message = "Password must have at least 8 characters."
                     
                 default:
                     break

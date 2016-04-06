@@ -74,7 +74,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.nc.addObserver(self, selector: "signUpSuccess", name: Notifications.signInSuccess, object: nil)
+        self.nc.addObserver(self, selector: "signUpSuccess", name: Notifications.signUpSuccess, object: nil)
         
         self.email.placeholder = "Email address"
         self.email.delegate = self
