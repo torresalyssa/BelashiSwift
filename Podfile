@@ -3,7 +3,7 @@ use_frameworks!
 
 target 'OverplayAppSwift' do
     pod 'CocoaAsyncSocket'
-    pod 'Alamofire'
+    pod 'Alamofire', '~> 3.2.1'
     pod 'JGProgressHUD'
 end
 
