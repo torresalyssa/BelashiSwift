@@ -29,8 +29,8 @@ class StartViewController: UIViewController, SignInDelegate, SignUpDelegate {
         super.viewDidLoad()
         
         // check if user is already signed in
-        if Account.sharedInstance.password.isEmpty == false {
-            print("Logged in as \(Account.sharedInstance.username).")
+        if Account.sharedInstance.password != nil {
+            print("Logged in as \(Account.sharedInstance.username!).")
             self.performSegueWithIdentifier("toChooseOverplayer", sender: self)
         }
         

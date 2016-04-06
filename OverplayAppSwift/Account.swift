@@ -12,7 +12,7 @@ class Account {
     
     static let sharedInstance = Account()
     
-    var username: String {
+    var username: String? {
         get {
             return NSUserDefaults.standardUserDefaults().stringForKey("username")!
         }
@@ -21,16 +21,20 @@ class Account {
         }
     }
     
-    var password: String {
+    var password: String? {
         get {
-            return NSUserDefaults.standardUserDefaults().stringForKey("password")!
+            if let p = NSUserDefaults.standardUserDefaults().stringForKey("password") {
+                return p
+            } else {
+                return nil
+            }
         }
         set {
             NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "password")
         }
     }
     
-    var launchedBefore: Bool {
+    var launchedBefore: Bool? {
         get {
             return NSUserDefaults.standardUserDefaults().boolForKey("launchedBefore")
         }
