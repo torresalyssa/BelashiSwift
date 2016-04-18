@@ -25,6 +25,7 @@ class StartViewController: UIViewController, SignInDelegate, SignUpDelegate {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     override func viewDidLoad() {
@@ -33,11 +34,11 @@ class StartViewController: UIViewController, SignInDelegate, SignUpDelegate {
         self.nc.addObserver(self, selector: "signInFail:", name: Notifications.signInFailure, object: nil)
         self.nc.addObserver(self, selector: "signUpFail:", name: Notifications.signUpFailure, object: nil)
         
-        // check if user is already signed in
-        /*if Account.sharedInstance.password != nil {
+        // TODO: make this actually check
+        if Account.sharedInstance.password != nil {
             print("Logged in as \(Account.sharedInstance.username!).")
             self.performSegueWithIdentifier("toChooseOverplayer", sender: self)
-        }*/
+        }
         
         // set up child views
         self.signInViewController = self.storyboard?.instantiateViewControllerWithIdentifier("signInForm")
@@ -61,11 +62,6 @@ class StartViewController: UIViewController, SignInDelegate, SignUpDelegate {
     }
     
     func signInFail(notification: NSNotification) {
-        if let info = notification.userInfo as? Dictionary<String, String> {
-            if let error = info["error"] {
-                print(error)
-            }
-        }
         
         let alertController = UIAlertController(title: "Please try again", message: "You entered incorrect email address or password.", preferredStyle: UIAlertControllerStyle.Alert)
         

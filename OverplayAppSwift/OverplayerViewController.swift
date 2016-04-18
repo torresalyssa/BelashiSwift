@@ -30,6 +30,8 @@ class OverplayerViewController: UIViewController, UIWebViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
         self.hud = JGProgressHUD(style: JGProgressHUDStyle.Light)
         self.hud.textLabel.text = "Loading..."
         self.hud.userInteractionEnabled = false

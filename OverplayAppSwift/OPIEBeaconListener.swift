@@ -27,7 +27,7 @@ class OPIEBeaconListener: NSObject, GCDAsyncUdpSocketDelegate {
         do {
             try self.socket.bindToPort(PORT)
         } catch {
-            print("ERROR: OPIE socket failed to bind to port %d", PORT)
+            print("ERROR: OPIE socket failed to bind to port", PORT)
             nc.postNotificationName(Notifications.OPIESocketError, object: nil)
         }
         

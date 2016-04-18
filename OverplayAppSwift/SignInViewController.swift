@@ -65,6 +65,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         Account.sharedInstance.username = self.email.text
         Account.sharedInstance.password = self.password.text
         print("Signed in as \(Account.sharedInstance.username!)")
+        self.delegate?.gotoChooseOverplayer()
     }
     
     func validateEmail(emailAddr: String) -> Bool {

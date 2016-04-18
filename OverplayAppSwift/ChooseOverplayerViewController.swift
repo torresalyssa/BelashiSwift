@@ -14,6 +14,9 @@ class ChooseOverplayerViewController : UIViewController, UICollectionViewDelegat
     
     @IBOutlet weak var mainStatusLabel: UILabel!
     @IBOutlet var overplayerCollection : UICollectionView!
+    @IBAction func gotoSettings(sender: AnyObject) {
+        self.performSegueWithIdentifier("toSettings", sender: nil)
+    }
     
     let nc = NSNotificationCenter.defaultCenter()
     var refreshControl : UIRefreshControl!
@@ -25,6 +28,7 @@ class ChooseOverplayerViewController : UIViewController, UICollectionViewDelegat
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     override func viewDidAppear(animated: Bool) {
