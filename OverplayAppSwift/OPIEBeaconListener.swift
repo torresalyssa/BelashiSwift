@@ -47,14 +47,10 @@ class OPIEBeaconListener: NSObject, GCDAsyncUdpSocketDelegate {
         self.opies = []
         
         for op in currentOpies {
-            if let lastHeard = op.lastHeardFrom {
-                let elapsedTime = NSDate().timeIntervalSinceDate(lastHeard)
-                print("\(elapsedTime)")
-                if  elapsedTime < timeBeforeDrop {
-                    self.opies.append(op)
-                } else {
-                    nc.postNotificationName(Notifications.droppedOPIE, object: nil, userInfo: ["OPIE": op])
-                }
+            let elapsedTime = NSDate().timeIntervalSinceDate(op.lastHeardFrom)
+            print("\(elapsedTime)")
+            if  elapsedTime < timeBeforeDrop {
+                self.opies.append(op)
             } else {
                 nc.postNotificationName(Notifications.droppedOPIE, object: nil, userInfo: ["OPIE": op])
             }

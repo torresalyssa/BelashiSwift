@@ -13,7 +13,7 @@ class OPIE {
     var systemName: String
     var location: String
     var ipAddress: String
-    var lastHeardFrom: NSDate?
+    var lastHeardFrom: NSDate
     
     // OverplayerCell in the collection view is currently formatted to display an icon
     // image with a 1:1 aspect ratio. Images of a different aspect ratio will look off.
@@ -27,6 +27,7 @@ class OPIE {
         self.systemName = ""
         self.location = ""
         self.ipAddress = ""
+        self.lastHeardFrom = NSDate()
         self.icon = OPIE.defaultIconImage
     }
     

@@ -25,45 +25,33 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func signUp(sender: UIButton) {
         
-        // check email address is valid
-        if self.email.text == nil || self.email.text!.isEmpty || validateEmail(self.email.text!) == false {
-            
-            let alertController = UIAlertController(title: "Email address", message: "Please enter a valid email address.", preferredStyle: UIAlertControllerStyle.Alert)
-            
-            alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-            
-            self.presentViewController(alertController, animated: true, completion: nil)
-        }
-            
-        // check both passwords are entered
-        else if self.password.text == nil || self.reEnteredPassword.text == nil || self.password.text!.isEmpty || self.reEnteredPassword.text!.isEmpty {
-            
-            let alertController = UIAlertController(title: "Password", message: "Please enter and re-enter a password.", preferredStyle: UIAlertControllerStyle.Alert)
-            
-            alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-            
-            self.presentViewController(alertController, animated: true, completion: nil)
-        }
-            
-        // check both passwords match
-        else if self.password.text != self.reEnteredPassword.text {
-            
-            let alertController = UIAlertController(title: "Password", message: "Passwords do not match!", preferredStyle: UIAlertControllerStyle.Alert)
-            
-            alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-            
-            self.presentViewController(alertController, animated: true, completion: nil)
+        guard let emailInput = self.email.text else {
+            showAlert("Email address", message: "Please enter a valid email address.")
+            return
         }
         
-        // TODO: sign up
-        else {
-            OCS.sharedInstance.signUp(self.email.text!, password: self.password.text!)
+        guard let p1 = self.password.text else {
+            showAlert("Password", message: "Please enter and re-enter a password.")
+            return
+        }
+        
+        guard let p2 = self.reEnteredPassword.text else {
+            showAlert("Password", message: "Please enter and re-enter a password.")
+            return
+        }
+        
+        if p1 != p2 {
+            showAlert("Password", message: "Passwords do not match!")
+        } else if validateEmail(emailInput) == false {
+            showAlert("Email address", message: "Please enter a valid email address.")
+        } else {
+            OCS.sharedInstance.signUp(emailInput, password: p1)
         }
     }
     
     @IBAction func signIn(sender: UIButton) {
-        if self.delegate != nil {
-            self.delegate?.gotoSignIn()
+        if let del = self.delegate {
+            del.gotoSignIn()
         }
     }
     
@@ -87,13 +75,21 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     func signUpSuccess() {
         Account.sharedInstance.username = self.email.text
         Account.sharedInstance.password = self.password.text
-        print("Signed up and signed in as \(Account.sharedInstance.username!)")
+        print("Signed up and signed in as \(Account.sharedInstance.username)")
         self.delegate?.gotoChooseOverplayer()
     }
     
     func validateEmail(emailAddr: String) -> Bool {
         let regex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
         return NSPredicate(format: "SELF MATCHES %@", regex).evaluateWithObject(emailAddr)
+    }
+    
+    func showAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
     // MARK: UITextFieldDelegate

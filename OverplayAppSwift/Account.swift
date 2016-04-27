@@ -14,11 +14,7 @@ class Account {
     
     var username: String? {
         get {
-            if let u = NSUserDefaults.standardUserDefaults().stringForKey("username") {
-                return u
-            } else {
-                return nil
-            }
+            return NSUserDefaults.standardUserDefaults().stringForKey("username")
         }
         set {
             NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "username")
@@ -27,18 +23,14 @@ class Account {
     
     var password: String? {
         get {
-            if let p = NSUserDefaults.standardUserDefaults().stringForKey("password") {
-                return p
-            } else {
-                return nil
-            }
+            return NSUserDefaults.standardUserDefaults().stringForKey("password")
         }
         set {
             NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "password")
         }
     }
     
-    var launchedBefore: Bool? {
+    var launchedBefore: Bool {
         get {
             return NSUserDefaults.standardUserDefaults().boolForKey("launchedBefore")
         }

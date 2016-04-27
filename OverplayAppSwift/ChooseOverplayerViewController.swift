@@ -21,7 +21,7 @@ class ChooseOverplayerViewController : UIViewController, UICollectionViewDelegat
     let nc = NSNotificationCenter.defaultCenter()
     var refreshControl : UIRefreshControl!
     var refreshing = true
-    var hud: JGProgressHUD!
+    var hud: JGProgressHUD?
     
     var availableOPIEs = [OPIE]()
     var iphoneIPAddress = ""
@@ -40,9 +40,9 @@ class ChooseOverplayerViewController : UIViewController, UICollectionViewDelegat
         
         // Display hud
         self.hud = JGProgressHUD(style: JGProgressHUDStyle.Light)
-        self.hud.textLabel.text = "Searching..."
-        self.hud.userInteractionEnabled = false
-        self.hud.showInView(self.view)
+        self.hud?.textLabel.text = "Searching..."
+        self.hud?.userInteractionEnabled = false
+        self.hud?.showInView(self.view)
 
         // Register for OPIE notifications
         nc.addObserver(self, selector: "newOPIE", name: Notifications.newOPIE, object: nil)
@@ -81,7 +81,10 @@ class ChooseOverplayerViewController : UIViewController, UICollectionViewDelegat
     
     func OPIESocketError() {
         self.refreshControl.endRefreshing()
-        self.hud.dismiss()
+        
+        if let h = self.hud {
+            h.dismiss()
+        }
         
         let alertController = UIAlertController(title: "OPIE Locator", message: "There was an error locating OPIEs.", preferredStyle: UIAlertControllerStyle.Alert)
         
@@ -113,7 +116,9 @@ class ChooseOverplayerViewController : UIViewController, UICollectionViewDelegat
     
     func stopRefresh() {
         self.refreshing = false
-        self.hud.dismiss()
+        if let h = self.hud {
+            h.dismiss()
+        }
         self.refreshControl.endRefreshing()
         self.sortByIPAndReload()
     }

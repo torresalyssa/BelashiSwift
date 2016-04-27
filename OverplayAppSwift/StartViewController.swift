@@ -35,19 +35,22 @@ class StartViewController: UIViewController, SignInDelegate, SignUpDelegate {
         self.nc.addObserver(self, selector: "signUpFail:", name: Notifications.signUpFailure, object: nil)
         
         // TODO: make this actually check
-        if Account.sharedInstance.password != nil {
+        
+        if let _ = Account.sharedInstance.password {
             print("Logged in as \(Account.sharedInstance.username!).")
             self.performSegueWithIdentifier("toChooseOverplayer", sender: self)
         }
         
         // set up child views
+        // will crash if it cannot find signInForm or signUpForm
+        
         self.signInViewController = self.storyboard?.instantiateViewControllerWithIdentifier("signInForm")
-        let signInVC = self.signInViewController as! SignInViewController
-        signInVC.delegate = self
+        let signInVC = self.signInViewController as? SignInViewController
+        signInVC?.delegate = self
         
         self.signUpViewController = self.storyboard?.instantiateViewControllerWithIdentifier("signUpForm")
-        let signUpVC = self.signUpViewController as! SignUpViewController
-        signUpVC.delegate = self
+        let signUpVC = self.signUpViewController as? SignUpViewController
+        signUpVC?.delegate = self
         
         // display sign in form
         self.activeViewController = self.signInViewController
@@ -107,19 +110,19 @@ class StartViewController: UIViewController, SignInDelegate, SignUpDelegate {
     }
     
     func removeInactiveViewController(inactiveViewController: UIViewController?) {
-        if inactiveViewController != nil {
-            inactiveViewController!.willMoveToParentViewController(nil)
-            inactiveViewController!.view.removeFromSuperview()
-            inactiveViewController!.removeFromParentViewController()
+        if let vc = inactiveViewController {
+            vc.willMoveToParentViewController(nil)
+            vc.view.removeFromSuperview()
+            vc.removeFromParentViewController()
         }
     }
     
     func updateActiveViewController() {
-        if self.activeViewController != nil {
-            addChildViewController(self.activeViewController!)
-            self.activeViewController!.view.frame = self.containerView.bounds
-            self.containerView.addSubview(self.activeViewController!.view)
-            self.activeViewController?.didMoveToParentViewController(self)
+        if let avc = self.activeViewController {
+            addChildViewController(avc)
+            avc.view.frame = self.containerView.bounds
+            self.containerView.addSubview(avc.view)
+            avc.didMoveToParentViewController(self)
         }
     }
 

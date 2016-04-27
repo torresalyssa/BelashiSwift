@@ -39,7 +39,12 @@ class OCS {
             
             .responseJSON{response in
                 
-                switch response.response!.statusCode {
+                guard let statusCode = response.response?.statusCode else {
+                    self.nc.postNotificationName(Notifications.signUpFailure, object: nil)
+                    return
+                }
+                
+                switch statusCode {
                     
                 case 200...299:
                     self.nc.postNotificationName(Notifications.signUpFailure, object: nil, userInfo: ["error": Notifications.userAlreadyExists])
@@ -58,7 +63,10 @@ class OCS {
             .validate()
             .responseJSON{response in
                 
-                let statusCode = response.response!.statusCode
+                guard let statusCode = response.response?.statusCode else {
+                    self.nc.postNotificationName(fail, object: nil)
+                    return
+                }
                 
                 switch response.result {
             
